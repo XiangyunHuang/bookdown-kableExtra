@@ -1,0 +1,42 @@
+language: r
+sudo: false
+cache:
+  packages: true
+
+latex: false
+branches:
+  only:
+    - master
+
+pandoc_version: 2.2.3.2
+
+git:
+  depth: 5
+  submodules: false
+  
+repos:
+  CRAN: https://cloud.r-project.org
+
+addons:
+  apt:
+    sources:
+      - sourceline: ppa:opencpu/imagemagick
+    packages:
+      - ghostscript
+      - imagemagick
+      - optipng
+      - libmagick++-dev
+
+before_install:
+  - curl -fLo /tmp/tinytex.tar.gz https://travis-bin.yihui.name/tinytex.tar.gz
+  - tar xzf /tmp/tinytex.tar.gz -C /$HOME
+  - export PATH=/$HOME/.TinyTeX/bin/x86_64-linux:$PATH
+
+before_script:
+  - Rscript -e 'update.packages(lib.loc = .libPaths()[1], ask = FALSE)'
+  - chmod +x ./_deploy.sh
+
+script:
+  - Rscript -e 'bookdown::render_book("index.Rmd","all")' 
+  - ./_deploy.sh
+

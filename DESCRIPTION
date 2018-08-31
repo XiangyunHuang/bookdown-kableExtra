@@ -1,0 +1,12 @@
+Package: TB
+Type: Book
+Title: Test Bookdown 
+Version: 0.0.1
+Imports: 
+  bookdown,
+  ggplot2,
+  gridExtra,
+  formatR
+Suggests: 
+  magick,
+  svglite
