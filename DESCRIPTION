@@ -10,3 +10,5 @@ Imports:
 Suggests: 
   magick,
   svglite
+Remotes: rstudio/rmarkdown,
+  rstudio/bookdown
