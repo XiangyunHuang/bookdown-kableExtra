@@ -6,6 +6,7 @@ Imports:
   bookdown,
   ggplot2,
   gridExtra,
+  kableExtra,
   formatR
 Suggests: 
   magick,

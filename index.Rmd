@@ -41,14 +41,76 @@ install.packages("bookdown")
 # devtools::install_github("rstudio/bookdown")
 ```
 
-Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading `#`.
+插入横线，续表的中文化
+
+```{r kable,eval=knitr::is_latex_output()}
+library(kableExtra)
+db <- mtcars[, 1:7]
+db2 <- cbind(rownames(db), db)
+colnames(db2) <- c("Methods", rep(c("Bias", "RMSE"), 3), "")
+
+kable(db2,
+  format = "latex", booktabs = TRUE, escape = T, row.names = F,
+  longtable = T, caption = "第1种类型的统计表格样式"
+) %>%
+  kable_styling(
+    latex_options = c("striped", "hold_position", "repeat_header"),
+    full_width = F, position = "center"
+  ) %>%
+  add_header_above(c(" ",
+    "$\\\\sigma^2$" = 2, "$\\\\phi$" = 2,
+    "$\\\\tau^2$" = 2, "$r=\\\\delta/\\\\phi$" = 1
+  ), escape = F) %>%
+  footnote(
+    general_title = "注：", title_format = "italic", threeparttable = T,
+    general = "* 星号表示的内容很长很长很长很长很长长长长长长长长长长长长长长长长长"
+  )
+```
+
+`threeparttable = TRUE` 处理超长的注解标记，`add_header_above` 函数内的 `escape = F` 用来处理数学公式，`longtable = T` 表格很长时需要分页，因此使用续表
+
+```{r kable-comp1,eval=knitr::is_latex_output()}
+# 造一些数据
+collapse_rows_dt <- expand.grid(
+  Country = sprintf("Country with a long name %s", c("A", "B")),
+  State = sprintf("State %s", c("a", "b")),
+  City = sprintf("City %s", c("1", "2")),
+  District = sprintf("District %s", c("1", "2"))
+) %>%
+  arrange(Country, State, City) %>%
+  mutate_all(as.character) %>%
+  mutate(
+    C1 = rnorm(n()),
+    C2 = rnorm(n())
+  )
+row_group_label_fonts <- list(
+  list(bold = T, italic = T),
+  list(bold = F, italic = F)
+)
+
+kable(collapse_rows_dt, "latex", longtable = TRUE,
+  booktabs = T, align = "c", linesep = "",
+  caption = "第2种类型的统计表格样式"
+) %>%
+  kable_styling(
+    latex_options = c("striped", "hold_position", "repeat_header"),
+    full_width = F, position = "center"
+  ) %>% 
+  column_spec(1, bold = T) %>%
+  collapse_rows(1:3,
+    latex_hline = "custom", custom_latex_hline = 1:3,
+    row_group_label_position = "stack",
+    row_group_label_fonts = row_group_label_fonts
+  )
+```
 
 To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <https://yihui.name/tinytex/>.
 
 软件信息
 
 ```{r}
-xfun::session_info(packages = c("rmarkdown","bookdown"))
+xfun::session_info(packages = c("rmarkdown","bookdown","kableExtra"),
+                   dependencies = FALSE)
 ```
 
 

@@ -1,3 +1,4 @@
+colortbl
 ctex
 environ
 fandol
@@ -6,8 +7,11 @@ ms
 realscripts
 rsfs
 subfig
+threeparttable
+threeparttablex
 tocbibind
 trimspaces
+tabu
 ulem
 xcolor
 xecjk
