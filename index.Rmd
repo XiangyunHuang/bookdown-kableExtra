@@ -10,6 +10,11 @@ link-citations: yes
 description: "This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook."
 ---
 
+```{r,include=FALSE}
+library(dplyr)
+```
+
+
 # Prerequisites
 
 This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports, e.g., a math equation $a^2 + b^2 = c^2$.
@@ -34,6 +39,7 @@ p(\boldsymbol{\theta}|Y)  & =  & \displaystyle \frac{p(\boldsymbol{\theta},Y)}{p
 \]
 
 The **bookdown** package can be installed from CRAN or Github:
+
 
 ```{r eval=FALSE}
 install.packages("bookdown")
