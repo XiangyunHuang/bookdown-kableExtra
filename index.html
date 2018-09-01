@@ -189,10 +189,65 @@ p(\boldsymbol{\theta}|Y)  &amp; =  &amp; \displaystyle \frac{p(\boldsymbol{\thet
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>)
 <span class="co"># or the development version</span>
 <span class="co"># devtools::install_github(&quot;rstudio/bookdown&quot;)</span></code></pre>
-<p>Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading <code>#</code>.</p>
+<p>插入横线，续表的中文化</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(kableExtra)
+db &lt;-<span class="st"> </span>mtcars[, <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>]
+db2 &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw">rownames</span>(db), db)
+<span class="kw">colnames</span>(db2) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Methods&quot;</span>, <span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;Bias&quot;</span>, <span class="st">&quot;RMSE&quot;</span>), <span class="dv">3</span>), <span class="st">&quot;&quot;</span>)
+
+<span class="kw">kable</span>(db2,
+  <span class="dt">format =</span> <span class="st">&quot;latex&quot;</span>, <span class="dt">booktabs =</span> <span class="ot">TRUE</span>, <span class="dt">escape =</span> T, <span class="dt">row.names =</span> F,
+  <span class="dt">longtable =</span> T, <span class="dt">caption =</span> <span class="st">&quot;第1种类型的统计表格样式&quot;</span>
+) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">kable_styling</span>(
+    <span class="dt">latex_options =</span> <span class="kw">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hold_position&quot;</span>, <span class="st">&quot;repeat_header&quot;</span>),
+    <span class="dt">full_width =</span> F, <span class="dt">position =</span> <span class="st">&quot;center&quot;</span>
+  ) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">add_header_above</span>(<span class="kw">c</span>(<span class="st">&quot; &quot;</span>,
+    <span class="st">&quot;$</span><span class="ch">\\\\</span><span class="st">sigma^2$&quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;$</span><span class="ch">\\\\</span><span class="st">phi$&quot;</span> =<span class="st"> </span><span class="dv">2</span>,
+    <span class="st">&quot;$</span><span class="ch">\\\\</span><span class="st">tau^2$&quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;$r=</span><span class="ch">\\\\</span><span class="st">delta/</span><span class="ch">\\\\</span><span class="st">phi$&quot;</span> =<span class="st"> </span><span class="dv">1</span>
+  ), <span class="dt">escape =</span> F) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">footnote</span>(
+    <span class="dt">general_title =</span> <span class="st">&quot;注：&quot;</span>, <span class="dt">title_format =</span> <span class="st">&quot;italic&quot;</span>, <span class="dt">threeparttable =</span> T,
+    <span class="dt">general =</span> <span class="st">&quot;* 星号表示的内容很长很长很长很长很长长长长长长长长长长长长长长长长长&quot;</span>
+  )</code></pre>
+<p><code>threeparttable = TRUE</code> 处理超长的注解标记，<code>add_header_above</code> 函数内的 <code>escape = F</code> 用来处理数学公式，<code>longtable = T</code> 表格很长时需要分页，因此使用续表</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 造一些数据</span>
+collapse_rows_dt &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(
+  <span class="dt">Country =</span> <span class="kw">sprintf</span>(<span class="st">&quot;Country with a long name %s&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>)),
+  <span class="dt">State =</span> <span class="kw">sprintf</span>(<span class="st">&quot;State %s&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>)),
+  <span class="dt">City =</span> <span class="kw">sprintf</span>(<span class="st">&quot;City %s&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>)),
+  <span class="dt">District =</span> <span class="kw">sprintf</span>(<span class="st">&quot;District %s&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>))
+) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(Country, State, City) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate_all</span>(as.character) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">C1 =</span> <span class="kw">rnorm</span>(<span class="kw">n</span>()),
+    <span class="dt">C2 =</span> <span class="kw">rnorm</span>(<span class="kw">n</span>())
+  )
+row_group_label_fonts &lt;-<span class="st"> </span><span class="kw">list</span>(
+  <span class="kw">list</span>(<span class="dt">bold =</span> T, <span class="dt">italic =</span> T),
+  <span class="kw">list</span>(<span class="dt">bold =</span> F, <span class="dt">italic =</span> F)
+)
+
+<span class="kw">kable</span>(collapse_rows_dt, <span class="st">&quot;latex&quot;</span>, <span class="dt">longtable =</span> <span class="ot">TRUE</span>,
+  <span class="dt">booktabs =</span> T, <span class="dt">align =</span> <span class="st">&quot;c&quot;</span>, <span class="dt">linesep =</span> <span class="st">&quot;&quot;</span>,
+  <span class="dt">caption =</span> <span class="st">&quot;第2种类型的统计表格样式&quot;</span>
+) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">kable_styling</span>(
+    <span class="dt">latex_options =</span> <span class="kw">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hold_position&quot;</span>, <span class="st">&quot;repeat_header&quot;</span>),
+    <span class="dt">full_width =</span> F, <span class="dt">position =</span> <span class="st">&quot;center&quot;</span>
+  ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">column_spec</span>(<span class="dv">1</span>, <span class="dt">bold =</span> T) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,
+    <span class="dt">latex_hline =</span> <span class="st">&quot;custom&quot;</span>, <span class="dt">custom_latex_hline =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,
+    <span class="dt">row_group_label_position =</span> <span class="st">&quot;stack&quot;</span>,
+    <span class="dt">row_group_label_fonts =</span> row_group_label_fonts
+  )</code></pre>
 <p>To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <a href="https://yihui.name/tinytex/" class="uri">https://yihui.name/tinytex/</a>.</p>
 <p>软件信息</p>
-<pre class="sourceCode r"><code class="sourceCode r">xfun<span class="op">::</span><span class="kw">session_info</span>(<span class="dt">packages =</span> <span class="kw">c</span>(<span class="st">&quot;rmarkdown&quot;</span>,<span class="st">&quot;bookdown&quot;</span>))</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">xfun<span class="op">::</span><span class="kw">session_info</span>(<span class="dt">packages =</span> <span class="kw">c</span>(<span class="st">&quot;rmarkdown&quot;</span>,<span class="st">&quot;bookdown&quot;</span>,<span class="st">&quot;kableExtra&quot;</span>),
+                   <span class="dt">dependencies =</span> <span class="ot">FALSE</span>)</code></pre>
 <pre><code>## R version 3.5.0 (2017-01-27)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
 ## Running under: Ubuntu 14.04.5 LTS
@@ -206,13 +261,7 @@ p(\boldsymbol{\theta}|Y)  &amp; =  &amp; \displaystyle \frac{p(\boldsymbol{\thet
 ##   LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 ## 
 ## Package version:
-##   backports_1.1.2 base64enc_0.1.3 bookdown_0.7.18 digest_0.6.16  
-##   evaluate_0.11   glue_1.3.0      graphics_3.5.0  grDevices_3.5.0
-##   highr_0.7       htmltools_0.3.6 jsonlite_1.5    knitr_1.20     
-##   magrittr_1.5    markdown_0.8    methods_3.5.0   mime_0.5       
-##   Rcpp_0.12.18    rmarkdown_1.10  rprojroot_1.3.2 stats_3.5.0    
-##   stringi_1.2.4   stringr_1.3.1   tinytex_0.8     tools_3.5.0    
-##   utils_3.5.0     xfun_0.3        yaml_2.2.0</code></pre>
+##   bookdown_0.7.18  kableExtra_0.9.0 rmarkdown_1.10</code></pre>
 
 </div>
             </section>
