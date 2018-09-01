@@ -18,7 +18,6 @@ description: "This is a minimal example of using the bookdown package to write a
 library(dplyr)
 ```
 
-
 # Prerequisites
 
 This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports, e.g., a math equation $a^2 + b^2 = c^2$.
@@ -44,7 +43,6 @@ p(\boldsymbol{\theta}|Y)  & =  & \displaystyle \frac{p(\boldsymbol{\theta},Y)}{p
 
 The **bookdown** package can be installed from CRAN or Github:
 
-
 ```{r eval=FALSE}
 install.packages("bookdown")
 # or the development version
@@ -61,11 +59,12 @@ colnames(db2) <- c("Methods", rep(c("Bias", "RMSE"), 3), "")
 
 kable(db2,
   format = "latex", booktabs = TRUE, escape = T, row.names = F,
-  longtable = T, caption = "第1种类型的统计表格样式"
+  longtable = T, caption = "第1种类型的统计表格样式",
+  linesep = c("", "", "", "", "", "\\midrule")
 ) %>%
   kable_styling(
-    latex_options = c("striped", "hold_position", "repeat_header"),
-    full_width = F, position = "center"
+    latex_options = c("hold_position", "repeat_header"),
+    full_width = F, position = "center", repeat_header_text = "（续）"
   ) %>%
   add_header_above(c(" ",
     "$\\\\sigma^2$" = 2, "$\\\\phi$" = 2,
@@ -73,11 +72,19 @@ kable(db2,
   ), escape = F) %>%
   footnote(
     general_title = "注：", title_format = "italic", threeparttable = T,
-    general = "* 星号表示的内容很长很长很长很长很长长长长长长长长长长长长长长长长长"
+    general = "* 星号表示的内容很长很长很长很长很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长"
   )
 ```
 
-`threeparttable = TRUE` 处理超长的注解标记，`add_header_above` 函数内的 `escape = F` 用来处理数学公式，`longtable = T` 表格很长时需要分页，因此使用续表
+- `striped` 默认使用浅灰色，`stripe_color` 可以用来指定颜色 `stripe_color="white"`，它只在 LaTeX 下工作，HTML 下更改颜色需要设置 CSS，可以不使用 `striped` 改变默认的白底设置  
+
+- `threeparttable = TRUE` 处理超长的注解标记，
+
+- `add_header_above` 函数内的 `escape = F` 用来处理数学公式，
+
+- `longtable = T` 表格很长时需要分页，因此使用续表，
+
+- `hold_position` 使用了 `[!h]` 控制浮动
 
 ```{r kable-comp1,eval=knitr::is_latex_output()}
 # 造一些数据
@@ -115,6 +122,9 @@ kable(collapse_rows_dt, "latex", longtable = TRUE,
 ```
 
 To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <https://yihui.name/tinytex/>.
+
+对某些数据用不同颜色高亮
+Selecting and colouring single table cells with **kableExtra** in R markdown `cell_spec` <https://stackoverflow.com/questions/50118394>
 
 软件信息
 
