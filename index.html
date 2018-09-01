@@ -189,11 +189,12 @@ db2 &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw"
 
 <span class="kw">kable</span>(db2,
   <span class="dt">format =</span> <span class="st">&quot;latex&quot;</span>, <span class="dt">booktabs =</span> <span class="ot">TRUE</span>, <span class="dt">escape =</span> T, <span class="dt">row.names =</span> F,
-  <span class="dt">longtable =</span> T, <span class="dt">caption =</span> <span class="st">&quot;第1种类型的统计表格样式&quot;</span>
+  <span class="dt">longtable =</span> T, <span class="dt">caption =</span> <span class="st">&quot;第1种类型的统计表格样式&quot;</span>,
+  <span class="dt">linesep =</span> <span class="kw">c</span>(<span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">midrule&quot;</span>)
 ) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">kable_styling</span>(
-    <span class="dt">latex_options =</span> <span class="kw">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hold_position&quot;</span>, <span class="st">&quot;repeat_header&quot;</span>),
-    <span class="dt">full_width =</span> F, <span class="dt">position =</span> <span class="st">&quot;center&quot;</span>
+    <span class="dt">latex_options =</span> <span class="kw">c</span>(<span class="st">&quot;hold_position&quot;</span>, <span class="st">&quot;repeat_header&quot;</span>),
+    <span class="dt">full_width =</span> F, <span class="dt">position =</span> <span class="st">&quot;center&quot;</span>, <span class="dt">repeat_header_text =</span> <span class="st">&quot;（续）&quot;</span>
   ) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">add_header_above</span>(<span class="kw">c</span>(<span class="st">&quot; &quot;</span>,
     <span class="st">&quot;$</span><span class="ch">\\\\</span><span class="st">sigma^2$&quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;$</span><span class="ch">\\\\</span><span class="st">phi$&quot;</span> =<span class="st"> </span><span class="dv">2</span>,
@@ -201,9 +202,15 @@ db2 &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw"
   ), <span class="dt">escape =</span> F) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">footnote</span>(
     <span class="dt">general_title =</span> <span class="st">&quot;注：&quot;</span>, <span class="dt">title_format =</span> <span class="st">&quot;italic&quot;</span>, <span class="dt">threeparttable =</span> T,
-    <span class="dt">general =</span> <span class="st">&quot;* 星号表示的内容很长很长很长很长很长长长长长长长长长长长长长长长长长&quot;</span>
+    <span class="dt">general =</span> <span class="st">&quot;* 星号表示的内容很长很长很长很长很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长&quot;</span>
   )</code></pre>
-<p><code>threeparttable = TRUE</code> 处理超长的注解标记，<code>add_header_above</code> 函数内的 <code>escape = F</code> 用来处理数学公式，<code>longtable = T</code> 表格很长时需要分页，因此使用续表</p>
+<ul>
+<li><p><code>striped</code> 默认使用浅灰色，<code>stripe_color</code> 可以用来指定颜色 <code>stripe_color=&quot;white&quot;</code>，它只在 LaTeX 下工作，HTML 下更改颜色需要设置 CSS，可以不使用 <code>striped</code> 改变默认的白底设置</p></li>
+<li><p><code>threeparttable = TRUE</code> 处理超长的注解标记，</p></li>
+<li><p><code>add_header_above</code> 函数内的 <code>escape = F</code> 用来处理数学公式，</p></li>
+<li><p><code>longtable = T</code> 表格很长时需要分页，因此使用续表，</p></li>
+<li><p><code>hold_position</code> 使用了 <code>[!h]</code> 控制浮动</p></li>
+</ul>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 造一些数据</span>
 collapse_rows_dt &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(
   <span class="dt">Country =</span> <span class="kw">sprintf</span>(<span class="st">&quot;Country with a long name %s&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>)),
@@ -237,6 +244,8 @@ row_group_label_fonts &lt;-<span class="st"> </span><span class="kw">list</span>
     <span class="dt">row_group_label_fonts =</span> row_group_label_fonts
   )</code></pre>
 <p>To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <a href="https://yihui.name/tinytex/" class="uri">https://yihui.name/tinytex/</a>.</p>
+<p>对某些数据用不同颜色高亮
+Selecting and colouring single table cells with <strong>kableExtra</strong> in R markdown <code>cell_spec</code> <a href="https://stackoverflow.com/questions/50118394" class="uri">https://stackoverflow.com/questions/50118394</a></p>
 <p>软件信息</p>
 <pre class="sourceCode r"><code class="sourceCode r">xfun<span class="op">::</span><span class="kw">session_info</span>(<span class="dt">packages =</span> <span class="kw">c</span>(<span class="st">&quot;rmarkdown&quot;</span>,<span class="st">&quot;bookdown&quot;</span>,<span class="st">&quot;kableExtra&quot;</span>),
                    <span class="dt">dependencies =</span> <span class="ot">FALSE</span>)</code></pre>

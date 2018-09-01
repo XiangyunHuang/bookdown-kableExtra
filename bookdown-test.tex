@@ -201,11 +201,12 @@ The \textbf{bookdown} package can be installed from CRAN or Github:
 
 \KeywordTok{kable}\NormalTok{(db2,}
   \DataTypeTok{format =} \StringTok{"latex"}\NormalTok{, }\DataTypeTok{booktabs =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{escape =}\NormalTok{ T, }\DataTypeTok{row.names =}\NormalTok{ F,}
-  \DataTypeTok{longtable =}\NormalTok{ T, }\DataTypeTok{caption =} \StringTok{"第1种类型的统计表格样式"}
+  \DataTypeTok{longtable =}\NormalTok{ T, }\DataTypeTok{caption =} \StringTok{"第1种类型的统计表格样式"}\NormalTok{,}
+  \DataTypeTok{linesep =} \KeywordTok{c}\NormalTok{(}\StringTok{""}\NormalTok{, }\StringTok{""}\NormalTok{, }\StringTok{""}\NormalTok{, }\StringTok{""}\NormalTok{, }\StringTok{""}\NormalTok{, }\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{midrule"}\NormalTok{)}
 \NormalTok{) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{kable_styling}\NormalTok{(}
-    \DataTypeTok{latex_options =} \KeywordTok{c}\NormalTok{(}\StringTok{"striped"}\NormalTok{, }\StringTok{"hold_position"}\NormalTok{, }\StringTok{"repeat_header"}\NormalTok{),}
-    \DataTypeTok{full_width =}\NormalTok{ F, }\DataTypeTok{position =} \StringTok{"center"}
+    \DataTypeTok{latex_options =} \KeywordTok{c}\NormalTok{(}\StringTok{"hold_position"}\NormalTok{, }\StringTok{"repeat_header"}\NormalTok{),}
+    \DataTypeTok{full_width =}\NormalTok{ F, }\DataTypeTok{position =} \StringTok{"center"}\NormalTok{, }\DataTypeTok{repeat_header_text =} \StringTok{"（续）"}
 \NormalTok{  ) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{add_header_above}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{" "}\NormalTok{,}
     \StringTok{"$}\CharTok{\textbackslash{}\textbackslash{}\textbackslash{}\textbackslash{}}\StringTok{sigma^2$"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{, }\StringTok{"$}\CharTok{\textbackslash{}\textbackslash{}\textbackslash{}\textbackslash{}}\StringTok{phi$"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{,}
@@ -213,28 +214,25 @@ The \textbf{bookdown} package can be installed from CRAN or Github:
 \NormalTok{  ), }\DataTypeTok{escape =}\NormalTok{ F) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{footnote}\NormalTok{(}
     \DataTypeTok{general_title =} \StringTok{"注："}\NormalTok{, }\DataTypeTok{title_format =} \StringTok{"italic"}\NormalTok{, }\DataTypeTok{threeparttable =}\NormalTok{ T,}
-    \DataTypeTok{general =} \StringTok{"* 星号表示的内容很长很长很长很长很长长长长长长长长长长长长长长长长长"}
+    \DataTypeTok{general =} \StringTok{"* 星号表示的内容很长很长很长很长很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长"}
 \NormalTok{  )}
 \end{Highlighting}
 \end{Shaded}
 
-\rowcolors{2}{white}{gray!6}
-
 \begin{ThreePartTable}
 \begin{TableNotes}
 \item \textit{注：} 
-\item * 星号表示的内容很长很长很长很长很长长长长长长长长长长长长长长长长长
+\item * 星号表示的内容很长很长很长很长很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长
 \end{TableNotes}
 \begin{longtable}[t]{lrrrrrrr}
 \caption{\label{tab:kable}第1种类型的统计表格样式}\\
-\hiderowcolors
 \toprule
 \multicolumn{1}{c}{ } & \multicolumn{2}{c}{$\sigma^2$} & \multicolumn{2}{c}{$\phi$} & \multicolumn{2}{c}{$\tau^2$} & \multicolumn{1}{c}{$r=\delta/\phi$} \\
 \cmidrule(l{2pt}r{2pt}){2-3} \cmidrule(l{2pt}r{2pt}){4-5} \cmidrule(l{2pt}r{2pt}){6-7} \cmidrule(l{2pt}r{2pt}){8-8}
 Methods & Bias & RMSE & Bias & RMSE & Bias & RMSE & \\
 \midrule
 \endfirsthead
-\caption[]{\label{tab:kable}第1种类型的统计表格样式 \textit{(continued)}}\\
+\caption[]{\label{tab:kable}第1种类型的统计表格样式 （续）}\\
 \toprule
 Methods & Bias & RMSE & Bias & RMSE & Bias & RMSE & \\
 \midrule
@@ -244,53 +242,62 @@ Methods & Bias & RMSE & Bias & RMSE & Bias & RMSE & \\
 \bottomrule
 \insertTableNotes
 \endlastfoot
-\showrowcolors
 Mazda RX4 & 21.0 & 6 & 160.0 & 110 & 3.90 & 2.620 & 16.46\\
 Mazda RX4 Wag & 21.0 & 6 & 160.0 & 110 & 3.90 & 2.875 & 17.02\\
 Datsun 710 & 22.8 & 4 & 108.0 & 93 & 3.85 & 2.320 & 18.61\\
 Hornet 4 Drive & 21.4 & 6 & 258.0 & 110 & 3.08 & 3.215 & 19.44\\
 Hornet Sportabout & 18.7 & 8 & 360.0 & 175 & 3.15 & 3.440 & 17.02\\
-\addlinespace
 Valiant & 18.1 & 6 & 225.0 & 105 & 2.76 & 3.460 & 20.22\\
+\midrule
 Duster 360 & 14.3 & 8 & 360.0 & 245 & 3.21 & 3.570 & 15.84\\
 Merc 240D & 24.4 & 4 & 146.7 & 62 & 3.69 & 3.190 & 20.00\\
 Merc 230 & 22.8 & 4 & 140.8 & 95 & 3.92 & 3.150 & 22.90\\
 Merc 280 & 19.2 & 6 & 167.6 & 123 & 3.92 & 3.440 & 18.30\\
-\addlinespace
 Merc 280C & 17.8 & 6 & 167.6 & 123 & 3.92 & 3.440 & 18.90\\
 Merc 450SE & 16.4 & 8 & 275.8 & 180 & 3.07 & 4.070 & 17.40\\
+\midrule
 Merc 450SL & 17.3 & 8 & 275.8 & 180 & 3.07 & 3.730 & 17.60\\
 Merc 450SLC & 15.2 & 8 & 275.8 & 180 & 3.07 & 3.780 & 18.00\\
 Cadillac Fleetwood & 10.4 & 8 & 472.0 & 205 & 2.93 & 5.250 & 17.98\\
-\addlinespace
 Lincoln Continental & 10.4 & 8 & 460.0 & 215 & 3.00 & 5.424 & 17.82\\
 Chrysler Imperial & 14.7 & 8 & 440.0 & 230 & 3.23 & 5.345 & 17.42\\
 Fiat 128 & 32.4 & 4 & 78.7 & 66 & 4.08 & 2.200 & 19.47\\
+\midrule
 Honda Civic & 30.4 & 4 & 75.7 & 52 & 4.93 & 1.615 & 18.52\\
 Toyota Corolla & 33.9 & 4 & 71.1 & 65 & 4.22 & 1.835 & 19.90\\
-\addlinespace
 Toyota Corona & 21.5 & 4 & 120.1 & 97 & 3.70 & 2.465 & 20.01\\
 Dodge Challenger & 15.5 & 8 & 318.0 & 150 & 2.76 & 3.520 & 16.87\\
 AMC Javelin & 15.2 & 8 & 304.0 & 150 & 3.15 & 3.435 & 17.30\\
 Camaro Z28 & 13.3 & 8 & 350.0 & 245 & 3.73 & 3.840 & 15.41\\
+\midrule
 Pontiac Firebird & 19.2 & 8 & 400.0 & 175 & 3.08 & 3.845 & 17.05\\
-\addlinespace
 Fiat X1-9 & 27.3 & 4 & 79.0 & 66 & 4.08 & 1.935 & 18.90\\
 Porsche 914-2 & 26.0 & 4 & 120.3 & 91 & 4.43 & 2.140 & 16.70\\
 Lotus Europa & 30.4 & 4 & 95.1 & 113 & 3.77 & 1.513 & 16.90\\
 Ford Pantera L & 15.8 & 8 & 351.0 & 264 & 4.22 & 3.170 & 14.50\\
 Ferrari Dino & 19.7 & 6 & 145.0 & 175 & 3.62 & 2.770 & 15.50\\
-\addlinespace
+\midrule
 Maserati Bora & 15.0 & 8 & 301.0 & 335 & 3.54 & 3.570 & 14.60\\
 Volvo 142E & 21.4 & 4 & 121.0 & 109 & 4.11 & 2.780 & 18.60\\*
 \end{longtable}
 \end{ThreePartTable}
-\rowcolors{2}{white}{white}
 
-\texttt{threeparttable\ =\ TRUE}
-处理超长的注解标记，\texttt{add\_header\_above} 函数内的
-\texttt{escape\ =\ F} 用来处理数学公式，\texttt{longtable\ =\ T}
-表格很长时需要分页，因此使用续表
+\begin{itemize}
+\item
+  \texttt{striped} 默认使用浅灰色，\texttt{stripe\_color}
+  可以用来指定颜色 \texttt{stripe\_color="white"}，它只在 LaTeX
+  下工作，HTML 下更改颜色需要设置 CSS，可以不使用 \texttt{striped}
+  改变默认的白底设置
+\item
+  \texttt{threeparttable\ =\ TRUE} 处理超长的注解标记，
+\item
+  \texttt{add\_header\_above} 函数内的 \texttt{escape\ =\ F}
+  用来处理数学公式，
+\item
+  \texttt{longtable\ =\ T} 表格很长时需要分页，因此使用续表，
+\item
+  \texttt{hold\_position} 使用了 \texttt{{[}!h{]}} 控制浮动
+\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -352,51 +359,55 @@ Country & State & City & District & C1 & C2\\
 \multicolumn{6}{l}{\textit{\textbf{Country with a long name A}}}\\
 \addlinespace[0.3em]
 \multicolumn{6}{l}{State a}\\
-\hspace{1em}\hspace{1em} &  & City 1 & District 1 & 0.8105812 & -1.5852928\\
+\hspace{1em}\hspace{1em} &  & City 1 & District 1 & -0.7134857 & -0.5440992\\
 
-\hspace{1em}\hspace{1em} &  &  & District 2 & 1.4179038 & 0.6183236\\
+\hspace{1em}\hspace{1em} &  &  & District 2 & -0.1588194 & 0.7962000\\
 \cmidrule{3-6}
-\hspace{1em}\hspace{1em} &  & City 2 & District 1 & 1.3476411 & -0.0471493\\
+\hspace{1em}\hspace{1em} &  & City 2 & District 1 & 1.9330248 & 0.9758507\\
 
-\hspace{1em}\hspace{1em} &  &  & District 2 & -0.5016625 & -0.2134680\\
+\hspace{1em}\hspace{1em} &  &  & District 2 & -0.7681937 & -0.6966675\\
 \cmidrule{2-6}
 \addlinespace[0.3em]
 \multicolumn{6}{l}{State b}\\
-\hspace{1em}\hspace{1em} &  & City 1 & District 1 & -0.2870107 & -0.4970279\\
+\hspace{1em}\hspace{1em} &  & City 1 & District 1 & 0.5891996 & -0.9080445\\
 
-\hspace{1em}\hspace{1em} &  &  & District 2 & -0.9662371 & 0.5951959\\
+\hspace{1em}\hspace{1em} &  &  & District 2 & -0.6094641 & -0.4825256\\
 \cmidrule{3-6}
-\hspace{1em}\hspace{1em} &  & City 2 & District 1 & 0.3049904 & -0.1769102\\
+\hspace{1em}\hspace{1em} &  & City 2 & District 1 & 0.5472820 & -0.6399916\\
 
-\hspace{1em}\hspace{1em} &  &  & District 2 & -0.2219533 & -0.3058346\\
+\hspace{1em}\hspace{1em} &  &  & District 2 & -0.0035399 & -0.4839596\\
 \cmidrule{1-6}
 \addlinespace[0.3em]
 \multicolumn{6}{l}{\textit{\textbf{Country with a long name B}}}\\
 \addlinespace[0.3em]
 \multicolumn{6}{l}{State a}\\
-\hspace{1em}\hspace{1em} &  & City 1 & District 1 & 1.1572648 & 1.0044060\\
+\hspace{1em}\hspace{1em} &  & City 1 & District 1 & 1.0640332 & -1.7445704\\
 
-\hspace{1em}\hspace{1em} &  &  & District 2 & 0.1663139 & 1.5270802\\
+\hspace{1em}\hspace{1em} &  &  & District 2 & 0.5182520 & -0.5595464\\
 \cmidrule{3-6}
-\hspace{1em}\hspace{1em} &  & City 2 & District 1 & -0.8831136 & 1.2107975\\
+\hspace{1em}\hspace{1em} &  & City 2 & District 1 & -0.0642246 & 0.4037566\\
 
-\hspace{1em}\hspace{1em} &  &  & District 2 & -0.5066262 & -0.1710977\\
+\hspace{1em}\hspace{1em} &  &  & District 2 & 0.3651629 & -1.3357406\\
 \cmidrule{2-6}
 \addlinespace[0.3em]
 \multicolumn{6}{l}{State b}\\
-\hspace{1em}\hspace{1em} &  & City 1 & District 1 & 0.3320892 & -1.2652650\\
+\hspace{1em}\hspace{1em} &  & City 1 & District 1 & 0.5852953 & -0.9327361\\
 
-\hspace{1em}\hspace{1em} &  &  & District 2 & -0.7597824 & 0.6592363\\
+\hspace{1em}\hspace{1em} &  &  & District 2 & -0.1910042 & -0.3198815\\
 \cmidrule{3-6}
-\hspace{1em}\hspace{1em} &  & City 2 & District 1 & -1.4505810 & -1.9158731\\
+\hspace{1em}\hspace{1em} &  & City 2 & District 1 & 1.6392177 & 0.7818467\\
 
-\hspace{1em}\hspace{1em} &  &  & District 2 & 1.5479971 & -0.9852655\\*
+\hspace{1em}\hspace{1em} &  &  & District 2 & -1.0547781 & -1.6290746\\*
 \end{longtable}
 \rowcolors{2}{white}{white}
 
 To compile this example to PDF, you need XeLaTeX. You are recommended to
 install TinyTeX (which includes XeLaTeX):
 \url{https://yihui.name/tinytex/}.
+
+对某些数据用不同颜色高亮 Selecting and colouring single table cells with
+\textbf{kableExtra} in R markdown \texttt{cell\_spec}
+\url{https://stackoverflow.com/questions/50118394}
 
 软件信息
 
