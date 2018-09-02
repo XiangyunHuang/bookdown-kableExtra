@@ -129,7 +129,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-09-01}
+    \date{2018-09-02}
 
 \usepackage[UTF8, heading]{ctex}
 
@@ -154,75 +154,59 @@
 \setcounter{tocdepth}{1}
 \tableofcontents
 }
-\hypertarget{prerequisites}{%
-\chapter{Prerequisites}\label{prerequisites}}
-
-This is a \emph{sample} book written in \textbf{Markdown}. You can use
-anything that Pandoc's Markdown supports, e.g., a math equation
-\(a^2 + b^2 = c^2\).
-
-\[
-\begin{array}{rcll}
-p(\boldsymbol{\theta}|Y)  & =  & \displaystyle \frac{p(\boldsymbol{\theta},Y)}{p(Y)}
-& \mbox{ [条件概率定义]}
-\\[4pt]
-& = & \displaystyle \frac{p(Y|\boldsymbol{\theta}) p(\boldsymbol{\theta})}{p(Y)}
-& \mbox{ [链式法则]}
-\\[4pt]
-& = & \displaystyle \frac{p(Y|\boldsymbol{\theta})p(\boldsymbol{\theta})}{\int_{\Theta}p(Y,\boldsymbol{\theta})d\boldsymbol{\theta}}
-& \mbox{ [全概率公式]}
-\\[4pt]
-& = & \displaystyle \frac{p(Y|\boldsymbol{\theta})p(\boldsymbol{\theta})}{\int_{\Theta}p(Y|\boldsymbol{\theta})p(\boldsymbol{\theta})d\boldsymbol{\theta}}
-& \mbox{ [链式法则]}
-\\[4pt]
-& \propto & \displaystyle p(Y|\boldsymbol{\theta})p(\boldsymbol{\theta})
-& \mbox{ [Y 是固定的]}
-\end{array}
-\]
-
-The \textbf{bookdown} package can be installed from CRAN or Github:
+\chapter{表格}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"bookdown"}\NormalTok{)}
-\CommentTok{# or the development version}
-\CommentTok{# devtools::install_github("rstudio/bookdown")}
-\end{Highlighting}
-\end{Shaded}
-
-插入横线，续表的中文化
-
-\begin{Shaded}
-\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(dplyr)}
 \KeywordTok{library}\NormalTok{(kableExtra)}
 \NormalTok{db <-}\StringTok{ }\NormalTok{mtcars[, }\DecValTok{1}\OperatorTok{:}\DecValTok{7}\NormalTok{]}
 \NormalTok{db2 <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(}\KeywordTok{rownames}\NormalTok{(db), db)}
 \KeywordTok{colnames}\NormalTok{(db2) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Methods"}\NormalTok{, }\KeywordTok{rep}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"Bias"}\NormalTok{, }\StringTok{"RMSE"}\NormalTok{), }\DecValTok{3}\NormalTok{), }\StringTok{""}\NormalTok{)}
-
-\KeywordTok{kable}\NormalTok{(db2,}
-  \DataTypeTok{format =} \StringTok{"latex"}\NormalTok{, }\DataTypeTok{booktabs =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{escape =}\NormalTok{ T, }\DataTypeTok{row.names =}\NormalTok{ F,}
-  \DataTypeTok{longtable =}\NormalTok{ T, }\DataTypeTok{caption =} \StringTok{"第1种类型的统计表格样式"}\NormalTok{,}
-  \DataTypeTok{linesep =} \KeywordTok{c}\NormalTok{(}\StringTok{""}\NormalTok{, }\StringTok{""}\NormalTok{, }\StringTok{""}\NormalTok{, }\StringTok{""}\NormalTok{, }\StringTok{""}\NormalTok{, }\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{midrule"}\NormalTok{)}
-\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{kable_styling}\NormalTok{(}
-    \DataTypeTok{latex_options =} \KeywordTok{c}\NormalTok{(}\StringTok{"hold_position"}\NormalTok{, }\StringTok{"repeat_header"}\NormalTok{),}
-    \DataTypeTok{full_width =}\NormalTok{ F, }\DataTypeTok{position =} \StringTok{"center"}\NormalTok{, }\DataTypeTok{repeat_header_text =} \StringTok{"（续）"}
+\ControlFlowTok{if}\NormalTok{ (knitr}\OperatorTok{::}\KeywordTok{is_latex_output}\NormalTok{()) \{}
+  \KeywordTok{kable}\NormalTok{(db2,}
+    \DataTypeTok{format =} \StringTok{"latex"}\NormalTok{, }\DataTypeTok{booktabs =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{escape =}\NormalTok{ T, }\DataTypeTok{row.names =}\NormalTok{ F,}
+    \DataTypeTok{longtable =}\NormalTok{ T, }\DataTypeTok{caption =} \StringTok{"第1种类型的统计表格样式"}\NormalTok{,}
+    \DataTypeTok{linesep =} \KeywordTok{c}\NormalTok{(}\StringTok{""}\NormalTok{, }\StringTok{""}\NormalTok{, }\StringTok{""}\NormalTok{, }\StringTok{""}\NormalTok{, }\StringTok{""}\NormalTok{, }\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{midrule"}\NormalTok{)}
 \NormalTok{  ) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{add_header_above}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{" "}\NormalTok{,}
-    \StringTok{"$}\CharTok{\textbackslash{}\textbackslash{}\textbackslash{}\textbackslash{}}\StringTok{sigma^2$"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{, }\StringTok{"$}\CharTok{\textbackslash{}\textbackslash{}\textbackslash{}\textbackslash{}}\StringTok{phi$"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{,}
-    \StringTok{"$}\CharTok{\textbackslash{}\textbackslash{}\textbackslash{}\textbackslash{}}\StringTok{tau^2$"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{, }\StringTok{"$r=}\CharTok{\textbackslash{}\textbackslash{}\textbackslash{}\textbackslash{}}\StringTok{delta/}\CharTok{\textbackslash{}\textbackslash{}\textbackslash{}\textbackslash{}}\StringTok{phi$"}\NormalTok{ =}\StringTok{ }\DecValTok{1}
-\NormalTok{  ), }\DataTypeTok{escape =}\NormalTok{ F) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{footnote}\NormalTok{(}
-    \DataTypeTok{general_title =} \StringTok{"注："}\NormalTok{, }\DataTypeTok{title_format =} \StringTok{"italic"}\NormalTok{, }\DataTypeTok{threeparttable =}\NormalTok{ T,}
-    \DataTypeTok{general =} \StringTok{"* 星号表示的内容很长很长很长很长很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长"}
-\NormalTok{  )}
+\StringTok{    }\KeywordTok{kable_styling}\NormalTok{(}
+      \DataTypeTok{latex_options =} \KeywordTok{c}\NormalTok{(}\StringTok{"hold_position"}\NormalTok{, }\StringTok{"repeat_header"}\NormalTok{),}
+      \DataTypeTok{full_width =}\NormalTok{ F, }\DataTypeTok{position =} \StringTok{"center"}\NormalTok{, }\DataTypeTok{repeat_header_method =} \StringTok{"replace"}\NormalTok{,}
+      \DataTypeTok{repeat_header_text =} \StringTok{"续表\ref{tab:kable}"}
+\NormalTok{    ) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{add_header_above}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{" "}\NormalTok{,}
+      \StringTok{"$}\CharTok{\textbackslash{}\textbackslash{}\textbackslash{}\textbackslash{}}\StringTok{sigma^2$"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{, }\StringTok{"$}\CharTok{\textbackslash{}\textbackslash{}\textbackslash{}\textbackslash{}}\StringTok{phi$"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{,}
+      \StringTok{"$}\CharTok{\textbackslash{}\textbackslash{}\textbackslash{}\textbackslash{}}\StringTok{tau^2$"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{, }\StringTok{"$r=}\CharTok{\textbackslash{}\textbackslash{}\textbackslash{}\textbackslash{}}\StringTok{delta/}\CharTok{\textbackslash{}\textbackslash{}\textbackslash{}\textbackslash{}}\StringTok{phi$"}\NormalTok{ =}\StringTok{ }\DecValTok{1}
+\NormalTok{    ), }\DataTypeTok{escape =}\NormalTok{ F) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{footnote}\NormalTok{(}
+      \DataTypeTok{general_title =} \StringTok{"注："}\NormalTok{, }\DataTypeTok{title_format =} \StringTok{"italic"}\NormalTok{, }\DataTypeTok{threeparttable =}\NormalTok{ T,}
+      \DataTypeTok{general =} \StringTok{"* 星号表示的内容很长"}
+\NormalTok{    )}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
+  \KeywordTok{kable}\NormalTok{(db2,}
+    \DataTypeTok{format =} \StringTok{"html"}\NormalTok{, }\DataTypeTok{booktabs =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{escape =}\NormalTok{ T, }\DataTypeTok{row.names =}\NormalTok{ F,}
+    \DataTypeTok{caption =} \StringTok{"第1种类型的统计表格样式"}
+\NormalTok{  ) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{kable_styling}\NormalTok{(}
+      \DataTypeTok{bootstrap_options =} \KeywordTok{c}\NormalTok{(}\StringTok{"basic"}\NormalTok{),}
+      \DataTypeTok{full_width =}\NormalTok{ F, }\DataTypeTok{position =} \StringTok{"center"}
+\NormalTok{    ) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{add_header_above}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{""}\NormalTok{,}
+      \StringTok{"$}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{sigma^2$"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{, }\StringTok{"$}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{phi$"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{,}
+      \StringTok{"$}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{tau^2$"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{, }\StringTok{"$r=}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{delta/}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{phi$"}\NormalTok{ =}\StringTok{ }\DecValTok{1}
+\NormalTok{    ), }\DataTypeTok{escape =}\NormalTok{ F) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{footnote}\NormalTok{(}
+      \DataTypeTok{general_title =} \StringTok{"注："}\NormalTok{, }\DataTypeTok{title_format =} \StringTok{"italic"}\NormalTok{, }\DataTypeTok{threeparttable =}\NormalTok{ T,}
+      \DataTypeTok{general =} \StringTok{"* 星号表示的内容很长"}
+\NormalTok{    )}
+\NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{ThreePartTable}
 \begin{TableNotes}
 \item \textit{注：} 
-\item * 星号表示的内容很长很长很长很长很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长
+\item * 星号表示的内容很长
 \end{TableNotes}
 \begin{longtable}[t]{lrrrrrrr}
 \caption{\label{tab:kable}第1种类型的统计表格样式}\\
@@ -232,7 +216,7 @@ The \textbf{bookdown} package can be installed from CRAN or Github:
 Methods & Bias & RMSE & Bias & RMSE & Bias & RMSE & \\
 \midrule
 \endfirsthead
-\caption[]{\label{tab:kable}第1种类型的统计表格样式 （续）}\\
+\caption[]{续表\ref{tab:kable}}\\
 \toprule
 Methods & Bias & RMSE & Bias & RMSE & Bias & RMSE & \\
 \midrule
@@ -283,11 +267,12 @@ Volvo 142E & 21.4 & 4 & 121.0 & 109 & 4.11 & 2.780 & 18.60\\*
 \end{ThreePartTable}
 
 \begin{itemize}
+\tightlist
 \item
   \texttt{striped} 默认使用浅灰色，\texttt{stripe\_color}
   可以用来指定颜色 \texttt{stripe\_color="white"}，它只在 LaTeX
   下工作，HTML 下更改颜色需要设置 CSS，可以不使用 \texttt{striped}
-  改变默认的白底设置
+  改变默认的白底设置\\
 \item
   \texttt{threeparttable\ =\ TRUE} 处理超长的注解标记，
 \item
@@ -297,119 +282,17 @@ Volvo 142E & 21.4 & 4 & 121.0 & 109 & 4.11 & 2.780 & 18.60\\*
   \texttt{longtable\ =\ T} 表格很长时需要分页，因此使用续表，
 \item
   \texttt{hold\_position} 使用了 \texttt{{[}!h{]}} 控制浮动
+\item
+  对于数学符号前要四个反斜杠这一点，作者今后会改变，只需要两个反斜杠，与
+  HTML 格式表格保持一致
+  \url{https://github.com/haozhu233/kableExtra/issues/120}
 \end{itemize}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# 造一些数据}
-\NormalTok{collapse_rows_dt <-}\StringTok{ }\KeywordTok{expand.grid}\NormalTok{(}
-  \DataTypeTok{Country =} \KeywordTok{sprintf}\NormalTok{(}\StringTok{"Country with a long name %s"}\NormalTok{, }\KeywordTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"B"}\NormalTok{)),}
-  \DataTypeTok{State =} \KeywordTok{sprintf}\NormalTok{(}\StringTok{"State %s"}\NormalTok{, }\KeywordTok{c}\NormalTok{(}\StringTok{"a"}\NormalTok{, }\StringTok{"b"}\NormalTok{)),}
-  \DataTypeTok{City =} \KeywordTok{sprintf}\NormalTok{(}\StringTok{"City %s"}\NormalTok{, }\KeywordTok{c}\NormalTok{(}\StringTok{"1"}\NormalTok{, }\StringTok{"2"}\NormalTok{)),}
-  \DataTypeTok{District =} \KeywordTok{sprintf}\NormalTok{(}\StringTok{"District %s"}\NormalTok{, }\KeywordTok{c}\NormalTok{(}\StringTok{"1"}\NormalTok{, }\StringTok{"2"}\NormalTok{))}
-\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{arrange}\NormalTok{(Country, State, City) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{mutate_all}\NormalTok{(as.character) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}
-    \DataTypeTok{C1 =} \KeywordTok{rnorm}\NormalTok{(}\KeywordTok{n}\NormalTok{()),}
-    \DataTypeTok{C2 =} \KeywordTok{rnorm}\NormalTok{(}\KeywordTok{n}\NormalTok{())}
-\NormalTok{  )}
-\NormalTok{row_group_label_fonts <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}
-  \KeywordTok{list}\NormalTok{(}\DataTypeTok{bold =}\NormalTok{ T, }\DataTypeTok{italic =}\NormalTok{ T),}
-  \KeywordTok{list}\NormalTok{(}\DataTypeTok{bold =}\NormalTok{ F, }\DataTypeTok{italic =}\NormalTok{ F)}
-\NormalTok{)}
-
-\KeywordTok{kable}\NormalTok{(collapse_rows_dt, }\StringTok{"latex"}\NormalTok{, }\DataTypeTok{longtable =} \OtherTok{TRUE}\NormalTok{,}
-  \DataTypeTok{booktabs =}\NormalTok{ T, }\DataTypeTok{align =} \StringTok{"c"}\NormalTok{, }\DataTypeTok{linesep =} \StringTok{""}\NormalTok{,}
-  \DataTypeTok{caption =} \StringTok{"第2种类型的统计表格样式"}
-\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{kable_styling}\NormalTok{(}
-    \DataTypeTok{latex_options =} \KeywordTok{c}\NormalTok{(}\StringTok{"striped"}\NormalTok{, }\StringTok{"hold_position"}\NormalTok{, }\StringTok{"repeat_header"}\NormalTok{),}
-    \DataTypeTok{full_width =}\NormalTok{ F, }\DataTypeTok{position =} \StringTok{"center"}
-\NormalTok{  ) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{column_spec}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{bold =}\NormalTok{ T) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{collapse_rows}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{,}
-    \DataTypeTok{latex_hline =} \StringTok{"custom"}\NormalTok{, }\DataTypeTok{custom_latex_hline =} \DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{,}
-    \DataTypeTok{row_group_label_position =} \StringTok{"stack"}\NormalTok{,}
-    \DataTypeTok{row_group_label_fonts =}\NormalTok{ row_group_label_fonts}
-\NormalTok{  )}
-\end{Highlighting}
-\end{Shaded}
-
-\rowcolors{2}{white}{gray!6}
-
-\begin{longtable}[t]{>{\bfseries}cccccc}
-\caption{\label{tab:kable-comp1}第2种类型的统计表格样式}\\
-\hiderowcolors
-\toprule
- &  & City & District & C1 & C2\\
-\midrule
-\endfirsthead
-\caption[]{\label{tab:kable-comp1}第2种类型的统计表格样式 \textit{(continued)}}\\
-\toprule
-Country & State & City & District & C1 & C2\\
-\midrule
-\endhead
-\
-\endfoot
-\bottomrule
-\endlastfoot
-\showrowcolors
-\addlinespace[0.3em]
-\multicolumn{6}{l}{\textit{\textbf{Country with a long name A}}}\\
-\addlinespace[0.3em]
-\multicolumn{6}{l}{State a}\\
-\hspace{1em}\hspace{1em} &  & City 1 & District 1 & -0.7134857 & -0.5440992\\
-
-\hspace{1em}\hspace{1em} &  &  & District 2 & -0.1588194 & 0.7962000\\
-\cmidrule{3-6}
-\hspace{1em}\hspace{1em} &  & City 2 & District 1 & 1.9330248 & 0.9758507\\
-
-\hspace{1em}\hspace{1em} &  &  & District 2 & -0.7681937 & -0.6966675\\
-\cmidrule{2-6}
-\addlinespace[0.3em]
-\multicolumn{6}{l}{State b}\\
-\hspace{1em}\hspace{1em} &  & City 1 & District 1 & 0.5891996 & -0.9080445\\
-
-\hspace{1em}\hspace{1em} &  &  & District 2 & -0.6094641 & -0.4825256\\
-\cmidrule{3-6}
-\hspace{1em}\hspace{1em} &  & City 2 & District 1 & 0.5472820 & -0.6399916\\
-
-\hspace{1em}\hspace{1em} &  &  & District 2 & -0.0035399 & -0.4839596\\
-\cmidrule{1-6}
-\addlinespace[0.3em]
-\multicolumn{6}{l}{\textit{\textbf{Country with a long name B}}}\\
-\addlinespace[0.3em]
-\multicolumn{6}{l}{State a}\\
-\hspace{1em}\hspace{1em} &  & City 1 & District 1 & 1.0640332 & -1.7445704\\
-
-\hspace{1em}\hspace{1em} &  &  & District 2 & 0.5182520 & -0.5595464\\
-\cmidrule{3-6}
-\hspace{1em}\hspace{1em} &  & City 2 & District 1 & -0.0642246 & 0.4037566\\
-
-\hspace{1em}\hspace{1em} &  &  & District 2 & 0.3651629 & -1.3357406\\
-\cmidrule{2-6}
-\addlinespace[0.3em]
-\multicolumn{6}{l}{State b}\\
-\hspace{1em}\hspace{1em} &  & City 1 & District 1 & 0.5852953 & -0.9327361\\
-
-\hspace{1em}\hspace{1em} &  &  & District 2 & -0.1910042 & -0.3198815\\
-\cmidrule{3-6}
-\hspace{1em}\hspace{1em} &  & City 2 & District 1 & 1.6392177 & 0.7818467\\
-
-\hspace{1em}\hspace{1em} &  &  & District 2 & -1.0547781 & -1.6290746\\*
-\end{longtable}
-\rowcolors{2}{white}{white}
-
-To compile this example to PDF, you need XeLaTeX. You are recommended to
-install TinyTeX (which includes XeLaTeX):
-\url{https://yihui.name/tinytex/}.
 
 对某些数据用不同颜色高亮 Selecting and colouring single table cells with
 \textbf{kableExtra} in R markdown \texttt{cell\_spec}
 \url{https://stackoverflow.com/questions/50118394}
 
-软件信息
+\section{软件信息}
 
 \begin{Shaded}
 \begin{Highlighting}[]

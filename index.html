@@ -25,7 +25,7 @@
 <meta name="author" content="Yihui Xie">
 
 
-<meta name="date" content="2018-09-01">
+<meta name="date" content="2018-09-02">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -47,6 +47,7 @@
 
 
 
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
 <style type="text/css">
@@ -129,7 +130,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">A Minimal Book Example</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> 表格</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#section-1.1"><i class="fa fa-check"></i><b>1.1</b> 软件信息</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -154,99 +157,975 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">A Minimal Book Example</h1>
 <p class="author"><em>Yihui Xie</em></p>
-<p class="date"><em>2018-09-01</em></p>
+<p class="date"><em>2018-09-02</em></p>
 </div>
-<div id="prerequisites" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> Prerequisites</h1>
-<p>This is a <em>sample</em> book written in <strong>Markdown</strong>. You can use anything that Pandoc’s Markdown supports, e.g., a math equation <span class="math inline">\(a^2 + b^2 = c^2\)</span>.</p>
-<p><span class="math display">\[
-\begin{array}{rcll}
-p(\boldsymbol{\theta}|Y)  &amp; =  &amp; \displaystyle \frac{p(\boldsymbol{\theta},Y)}{p(Y)}
-&amp; \mbox{ [条件概率定义]}
-\\[4pt]
-&amp; = &amp; \displaystyle \frac{p(Y|\boldsymbol{\theta}) p(\boldsymbol{\theta})}{p(Y)}
-&amp; \mbox{ [链式法则]}
-\\[4pt]
-&amp; = &amp; \displaystyle \frac{p(Y|\boldsymbol{\theta})p(\boldsymbol{\theta})}{\int_{\Theta}p(Y,\boldsymbol{\theta})d\boldsymbol{\theta}}
-&amp; \mbox{ [全概率公式]}
-\\[4pt]
-&amp; = &amp; \displaystyle \frac{p(Y|\boldsymbol{\theta})p(\boldsymbol{\theta})}{\int_{\Theta}p(Y|\boldsymbol{\theta})p(\boldsymbol{\theta})d\boldsymbol{\theta}}
-&amp; \mbox{ [链式法则]}
-\\[4pt]
-&amp; \propto &amp; \displaystyle p(Y|\boldsymbol{\theta})p(\boldsymbol{\theta})
-&amp; \mbox{ [Y 是固定的]}
-\end{array}
-\]</span></p>
-<p>The <strong>bookdown</strong> package can be installed from CRAN or Github:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>)
-<span class="co"># or the development version</span>
-<span class="co"># devtools::install_github(&quot;rstudio/bookdown&quot;)</span></code></pre>
-<p>插入横线，续表的中文化</p>
+<div id="section-1" class="section level1">
+<h1><span class="header-section-number">Chapter 1</span> 表格</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(kableExtra)
 db &lt;-<span class="st"> </span>mtcars[, <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>]
 db2 &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw">rownames</span>(db), db)
 <span class="kw">colnames</span>(db2) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Methods&quot;</span>, <span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;Bias&quot;</span>, <span class="st">&quot;RMSE&quot;</span>), <span class="dv">3</span>), <span class="st">&quot;&quot;</span>)
-
-<span class="kw">kable</span>(db2,
-  <span class="dt">format =</span> <span class="st">&quot;latex&quot;</span>, <span class="dt">booktabs =</span> <span class="ot">TRUE</span>, <span class="dt">escape =</span> T, <span class="dt">row.names =</span> F,
-  <span class="dt">longtable =</span> T, <span class="dt">caption =</span> <span class="st">&quot;第1种类型的统计表格样式&quot;</span>,
-  <span class="dt">linesep =</span> <span class="kw">c</span>(<span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">midrule&quot;</span>)
-) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">kable_styling</span>(
-    <span class="dt">latex_options =</span> <span class="kw">c</span>(<span class="st">&quot;hold_position&quot;</span>, <span class="st">&quot;repeat_header&quot;</span>),
-    <span class="dt">full_width =</span> F, <span class="dt">position =</span> <span class="st">&quot;center&quot;</span>, <span class="dt">repeat_header_text =</span> <span class="st">&quot;（续）&quot;</span>
+<span class="cf">if</span> (knitr<span class="op">::</span><span class="kw">is_latex_output</span>()) {
+  <span class="kw">kable</span>(db2,
+    <span class="dt">format =</span> <span class="st">&quot;latex&quot;</span>, <span class="dt">booktabs =</span> <span class="ot">TRUE</span>, <span class="dt">escape =</span> T, <span class="dt">row.names =</span> F,
+    <span class="dt">longtable =</span> T, <span class="dt">caption =</span> <span class="st">&quot;第1种类型的统计表格样式&quot;</span>,
+    <span class="dt">linesep =</span> <span class="kw">c</span>(<span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">midrule&quot;</span>)
   ) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">add_header_above</span>(<span class="kw">c</span>(<span class="st">&quot; &quot;</span>,
-    <span class="st">&quot;$</span><span class="ch">\\\\</span><span class="st">sigma^2$&quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;$</span><span class="ch">\\\\</span><span class="st">phi$&quot;</span> =<span class="st"> </span><span class="dv">2</span>,
-    <span class="st">&quot;$</span><span class="ch">\\\\</span><span class="st">tau^2$&quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;$r=</span><span class="ch">\\\\</span><span class="st">delta/</span><span class="ch">\\\\</span><span class="st">phi$&quot;</span> =<span class="st"> </span><span class="dv">1</span>
-  ), <span class="dt">escape =</span> F) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">footnote</span>(
-    <span class="dt">general_title =</span> <span class="st">&quot;注：&quot;</span>, <span class="dt">title_format =</span> <span class="st">&quot;italic&quot;</span>, <span class="dt">threeparttable =</span> T,
-    <span class="dt">general =</span> <span class="st">&quot;* 星号表示的内容很长很长很长很长很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长&quot;</span>
-  )</code></pre>
+<span class="st">    </span><span class="kw">kable_styling</span>(
+      <span class="dt">latex_options =</span> <span class="kw">c</span>(<span class="st">&quot;hold_position&quot;</span>, <span class="st">&quot;repeat_header&quot;</span>),
+      <span class="dt">full_width =</span> F, <span class="dt">position =</span> <span class="st">&quot;center&quot;</span>, <span class="dt">repeat_header_method =</span> <span class="st">&quot;replace&quot;</span>,
+      <span class="dt">repeat_header_text =</span> <span class="st">&quot;续表<a href="index.html#tab:kable">1.1</a>&quot;</span>
+    ) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">add_header_above</span>(<span class="kw">c</span>(<span class="st">&quot; &quot;</span>,
+      <span class="st">&quot;$</span><span class="ch">\\\\</span><span class="st">sigma^2$&quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;$</span><span class="ch">\\\\</span><span class="st">phi$&quot;</span> =<span class="st"> </span><span class="dv">2</span>,
+      <span class="st">&quot;$</span><span class="ch">\\\\</span><span class="st">tau^2$&quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;$r=</span><span class="ch">\\\\</span><span class="st">delta/</span><span class="ch">\\\\</span><span class="st">phi$&quot;</span> =<span class="st"> </span><span class="dv">1</span>
+    ), <span class="dt">escape =</span> F) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">footnote</span>(
+      <span class="dt">general_title =</span> <span class="st">&quot;注：&quot;</span>, <span class="dt">title_format =</span> <span class="st">&quot;italic&quot;</span>, <span class="dt">threeparttable =</span> T,
+      <span class="dt">general =</span> <span class="st">&quot;* 星号表示的内容很长&quot;</span>
+    )
+} <span class="cf">else</span> {
+  <span class="kw">kable</span>(db2,
+    <span class="dt">format =</span> <span class="st">&quot;html&quot;</span>, <span class="dt">booktabs =</span> <span class="ot">TRUE</span>, <span class="dt">escape =</span> T, <span class="dt">row.names =</span> F,
+    <span class="dt">caption =</span> <span class="st">&quot;第1种类型的统计表格样式&quot;</span>
+  ) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">kable_styling</span>(
+      <span class="dt">bootstrap_options =</span> <span class="kw">c</span>(<span class="st">&quot;basic&quot;</span>),
+      <span class="dt">full_width =</span> F, <span class="dt">position =</span> <span class="st">&quot;center&quot;</span>
+    ) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">add_header_above</span>(<span class="kw">c</span>(<span class="st">&quot;&quot;</span>,
+      <span class="st">&quot;$</span><span class="ch">\\</span><span class="st">sigma^2$&quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;$</span><span class="ch">\\</span><span class="st">phi$&quot;</span> =<span class="st"> </span><span class="dv">2</span>,
+      <span class="st">&quot;$</span><span class="ch">\\</span><span class="st">tau^2$&quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;$r=</span><span class="ch">\\</span><span class="st">delta/</span><span class="ch">\\</span><span class="st">phi$&quot;</span> =<span class="st"> </span><span class="dv">1</span>
+    ), <span class="dt">escape =</span> F) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">footnote</span>(
+      <span class="dt">general_title =</span> <span class="st">&quot;注：&quot;</span>, <span class="dt">title_format =</span> <span class="st">&quot;italic&quot;</span>, <span class="dt">threeparttable =</span> T,
+      <span class="dt">general =</span> <span class="st">&quot;* 星号表示的内容很长&quot;</span>
+    )
+}</code></pre>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:kable">Table 1.1: </span>第1种类型的统计表格样式
+</caption>
+<thead>
+<tr>
+<th style="border-bottom:hidden" colspan="1">
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">
+<span class="math inline">\(\sigma^2\)</span>
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">
+<span class="math inline">\(\phi\)</span>
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">
+<span class="math inline">\(\tau^2\)</span>
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">
+<span class="math inline">\(r=\delta/\phi\)</span>
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+Methods
+</th>
+<th style="text-align:right;">
+Bias
+</th>
+<th style="text-align:right;">
+RMSE
+</th>
+<th style="text-align:right;">
+Bias
+</th>
+<th style="text-align:right;">
+RMSE
+</th>
+<th style="text-align:right;">
+Bias
+</th>
+<th style="text-align:right;">
+RMSE
+</th>
+<th style="text-align:right;">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Mazda RX4
+</td>
+<td style="text-align:right;">
+21.0
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+160.0
+</td>
+<td style="text-align:right;">
+110
+</td>
+<td style="text-align:right;">
+3.90
+</td>
+<td style="text-align:right;">
+2.620
+</td>
+<td style="text-align:right;">
+16.46
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mazda RX4 Wag
+</td>
+<td style="text-align:right;">
+21.0
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+160.0
+</td>
+<td style="text-align:right;">
+110
+</td>
+<td style="text-align:right;">
+3.90
+</td>
+<td style="text-align:right;">
+2.875
+</td>
+<td style="text-align:right;">
+17.02
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Datsun 710
+</td>
+<td style="text-align:right;">
+22.8
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+108.0
+</td>
+<td style="text-align:right;">
+93
+</td>
+<td style="text-align:right;">
+3.85
+</td>
+<td style="text-align:right;">
+2.320
+</td>
+<td style="text-align:right;">
+18.61
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hornet 4 Drive
+</td>
+<td style="text-align:right;">
+21.4
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+258.0
+</td>
+<td style="text-align:right;">
+110
+</td>
+<td style="text-align:right;">
+3.08
+</td>
+<td style="text-align:right;">
+3.215
+</td>
+<td style="text-align:right;">
+19.44
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hornet Sportabout
+</td>
+<td style="text-align:right;">
+18.7
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+360.0
+</td>
+<td style="text-align:right;">
+175
+</td>
+<td style="text-align:right;">
+3.15
+</td>
+<td style="text-align:right;">
+3.440
+</td>
+<td style="text-align:right;">
+17.02
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Valiant
+</td>
+<td style="text-align:right;">
+18.1
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+225.0
+</td>
+<td style="text-align:right;">
+105
+</td>
+<td style="text-align:right;">
+2.76
+</td>
+<td style="text-align:right;">
+3.460
+</td>
+<td style="text-align:right;">
+20.22
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Duster 360
+</td>
+<td style="text-align:right;">
+14.3
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+360.0
+</td>
+<td style="text-align:right;">
+245
+</td>
+<td style="text-align:right;">
+3.21
+</td>
+<td style="text-align:right;">
+3.570
+</td>
+<td style="text-align:right;">
+15.84
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Merc 240D
+</td>
+<td style="text-align:right;">
+24.4
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+146.7
+</td>
+<td style="text-align:right;">
+62
+</td>
+<td style="text-align:right;">
+3.69
+</td>
+<td style="text-align:right;">
+3.190
+</td>
+<td style="text-align:right;">
+20.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Merc 230
+</td>
+<td style="text-align:right;">
+22.8
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+140.8
+</td>
+<td style="text-align:right;">
+95
+</td>
+<td style="text-align:right;">
+3.92
+</td>
+<td style="text-align:right;">
+3.150
+</td>
+<td style="text-align:right;">
+22.90
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Merc 280
+</td>
+<td style="text-align:right;">
+19.2
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+167.6
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+3.92
+</td>
+<td style="text-align:right;">
+3.440
+</td>
+<td style="text-align:right;">
+18.30
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Merc 280C
+</td>
+<td style="text-align:right;">
+17.8
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+167.6
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+3.92
+</td>
+<td style="text-align:right;">
+3.440
+</td>
+<td style="text-align:right;">
+18.90
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Merc 450SE
+</td>
+<td style="text-align:right;">
+16.4
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+275.8
+</td>
+<td style="text-align:right;">
+180
+</td>
+<td style="text-align:right;">
+3.07
+</td>
+<td style="text-align:right;">
+4.070
+</td>
+<td style="text-align:right;">
+17.40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Merc 450SL
+</td>
+<td style="text-align:right;">
+17.3
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+275.8
+</td>
+<td style="text-align:right;">
+180
+</td>
+<td style="text-align:right;">
+3.07
+</td>
+<td style="text-align:right;">
+3.730
+</td>
+<td style="text-align:right;">
+17.60
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Merc 450SLC
+</td>
+<td style="text-align:right;">
+15.2
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+275.8
+</td>
+<td style="text-align:right;">
+180
+</td>
+<td style="text-align:right;">
+3.07
+</td>
+<td style="text-align:right;">
+3.780
+</td>
+<td style="text-align:right;">
+18.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cadillac Fleetwood
+</td>
+<td style="text-align:right;">
+10.4
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+472.0
+</td>
+<td style="text-align:right;">
+205
+</td>
+<td style="text-align:right;">
+2.93
+</td>
+<td style="text-align:right;">
+5.250
+</td>
+<td style="text-align:right;">
+17.98
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Lincoln Continental
+</td>
+<td style="text-align:right;">
+10.4
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+460.0
+</td>
+<td style="text-align:right;">
+215
+</td>
+<td style="text-align:right;">
+3.00
+</td>
+<td style="text-align:right;">
+5.424
+</td>
+<td style="text-align:right;">
+17.82
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Chrysler Imperial
+</td>
+<td style="text-align:right;">
+14.7
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+440.0
+</td>
+<td style="text-align:right;">
+230
+</td>
+<td style="text-align:right;">
+3.23
+</td>
+<td style="text-align:right;">
+5.345
+</td>
+<td style="text-align:right;">
+17.42
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fiat 128
+</td>
+<td style="text-align:right;">
+32.4
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+78.7
+</td>
+<td style="text-align:right;">
+66
+</td>
+<td style="text-align:right;">
+4.08
+</td>
+<td style="text-align:right;">
+2.200
+</td>
+<td style="text-align:right;">
+19.47
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Honda Civic
+</td>
+<td style="text-align:right;">
+30.4
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+75.7
+</td>
+<td style="text-align:right;">
+52
+</td>
+<td style="text-align:right;">
+4.93
+</td>
+<td style="text-align:right;">
+1.615
+</td>
+<td style="text-align:right;">
+18.52
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Toyota Corolla
+</td>
+<td style="text-align:right;">
+33.9
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+71.1
+</td>
+<td style="text-align:right;">
+65
+</td>
+<td style="text-align:right;">
+4.22
+</td>
+<td style="text-align:right;">
+1.835
+</td>
+<td style="text-align:right;">
+19.90
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Toyota Corona
+</td>
+<td style="text-align:right;">
+21.5
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+120.1
+</td>
+<td style="text-align:right;">
+97
+</td>
+<td style="text-align:right;">
+3.70
+</td>
+<td style="text-align:right;">
+2.465
+</td>
+<td style="text-align:right;">
+20.01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Dodge Challenger
+</td>
+<td style="text-align:right;">
+15.5
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+318.0
+</td>
+<td style="text-align:right;">
+150
+</td>
+<td style="text-align:right;">
+2.76
+</td>
+<td style="text-align:right;">
+3.520
+</td>
+<td style="text-align:right;">
+16.87
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+AMC Javelin
+</td>
+<td style="text-align:right;">
+15.2
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+304.0
+</td>
+<td style="text-align:right;">
+150
+</td>
+<td style="text-align:right;">
+3.15
+</td>
+<td style="text-align:right;">
+3.435
+</td>
+<td style="text-align:right;">
+17.30
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Camaro Z28
+</td>
+<td style="text-align:right;">
+13.3
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+350.0
+</td>
+<td style="text-align:right;">
+245
+</td>
+<td style="text-align:right;">
+3.73
+</td>
+<td style="text-align:right;">
+3.840
+</td>
+<td style="text-align:right;">
+15.41
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pontiac Firebird
+</td>
+<td style="text-align:right;">
+19.2
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+400.0
+</td>
+<td style="text-align:right;">
+175
+</td>
+<td style="text-align:right;">
+3.08
+</td>
+<td style="text-align:right;">
+3.845
+</td>
+<td style="text-align:right;">
+17.05
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fiat X1-9
+</td>
+<td style="text-align:right;">
+27.3
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+79.0
+</td>
+<td style="text-align:right;">
+66
+</td>
+<td style="text-align:right;">
+4.08
+</td>
+<td style="text-align:right;">
+1.935
+</td>
+<td style="text-align:right;">
+18.90
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Porsche 914-2
+</td>
+<td style="text-align:right;">
+26.0
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+120.3
+</td>
+<td style="text-align:right;">
+91
+</td>
+<td style="text-align:right;">
+4.43
+</td>
+<td style="text-align:right;">
+2.140
+</td>
+<td style="text-align:right;">
+16.70
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Lotus Europa
+</td>
+<td style="text-align:right;">
+30.4
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+95.1
+</td>
+<td style="text-align:right;">
+113
+</td>
+<td style="text-align:right;">
+3.77
+</td>
+<td style="text-align:right;">
+1.513
+</td>
+<td style="text-align:right;">
+16.90
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ford Pantera L
+</td>
+<td style="text-align:right;">
+15.8
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+351.0
+</td>
+<td style="text-align:right;">
+264
+</td>
+<td style="text-align:right;">
+4.22
+</td>
+<td style="text-align:right;">
+3.170
+</td>
+<td style="text-align:right;">
+14.50
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ferrari Dino
+</td>
+<td style="text-align:right;">
+19.7
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+145.0
+</td>
+<td style="text-align:right;">
+175
+</td>
+<td style="text-align:right;">
+3.62
+</td>
+<td style="text-align:right;">
+2.770
+</td>
+<td style="text-align:right;">
+15.50
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Maserati Bora
+</td>
+<td style="text-align:right;">
+15.0
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+301.0
+</td>
+<td style="text-align:right;">
+335
+</td>
+<td style="text-align:right;">
+3.54
+</td>
+<td style="text-align:right;">
+3.570
+</td>
+<td style="text-align:right;">
+14.60
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Volvo 142E
+</td>
+<td style="text-align:right;">
+21.4
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+121.0
+</td>
+<td style="text-align:right;">
+109
+</td>
+<td style="text-align:right;">
+4.11
+</td>
+<td style="text-align:right;">
+2.780
+</td>
+<td style="text-align:right;">
+18.60
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<span style="font-style: italic;">注：</span>
+</td>
+</tr>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup></sup> * 星号表示的内容很长
+</td>
+</tr>
+</tfoot>
+</table>
 <ul>
-<li><p><code>striped</code> 默认使用浅灰色，<code>stripe_color</code> 可以用来指定颜色 <code>stripe_color=&quot;white&quot;</code>，它只在 LaTeX 下工作，HTML 下更改颜色需要设置 CSS，可以不使用 <code>striped</code> 改变默认的白底设置</p></li>
-<li><p><code>threeparttable = TRUE</code> 处理超长的注解标记，</p></li>
-<li><p><code>add_header_above</code> 函数内的 <code>escape = F</code> 用来处理数学公式，</p></li>
-<li><p><code>longtable = T</code> 表格很长时需要分页，因此使用续表，</p></li>
-<li><p><code>hold_position</code> 使用了 <code>[!h]</code> 控制浮动</p></li>
+<li><code>striped</code> 默认使用浅灰色，<code>stripe_color</code> 可以用来指定颜色 <code>stripe_color=&quot;white&quot;</code>，它只在 LaTeX 下工作，HTML 下更改颜色需要设置 CSS，可以不使用 <code>striped</code> 改变默认的白底设置<br />
+</li>
+<li><code>threeparttable = TRUE</code> 处理超长的注解标记，</li>
+<li><code>add_header_above</code> 函数内的 <code>escape = F</code> 用来处理数学公式，</li>
+<li><code>longtable = T</code> 表格很长时需要分页，因此使用续表，</li>
+<li><code>hold_position</code> 使用了 <code>[!h]</code> 控制浮动</li>
+<li>对于数学符号前要四个反斜杠这一点，作者今后会改变，只需要两个反斜杠，与 HTML 格式表格保持一致 <a href="https://github.com/haozhu233/kableExtra/issues/120" class="uri">https://github.com/haozhu233/kableExtra/issues/120</a></li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 造一些数据</span>
-collapse_rows_dt &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(
-  <span class="dt">Country =</span> <span class="kw">sprintf</span>(<span class="st">&quot;Country with a long name %s&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>)),
-  <span class="dt">State =</span> <span class="kw">sprintf</span>(<span class="st">&quot;State %s&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>)),
-  <span class="dt">City =</span> <span class="kw">sprintf</span>(<span class="st">&quot;City %s&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>)),
-  <span class="dt">District =</span> <span class="kw">sprintf</span>(<span class="st">&quot;District %s&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>))
-) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">arrange</span>(Country, State, City) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate_all</span>(as.character) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(
-    <span class="dt">C1 =</span> <span class="kw">rnorm</span>(<span class="kw">n</span>()),
-    <span class="dt">C2 =</span> <span class="kw">rnorm</span>(<span class="kw">n</span>())
-  )
-row_group_label_fonts &lt;-<span class="st"> </span><span class="kw">list</span>(
-  <span class="kw">list</span>(<span class="dt">bold =</span> T, <span class="dt">italic =</span> T),
-  <span class="kw">list</span>(<span class="dt">bold =</span> F, <span class="dt">italic =</span> F)
-)
-
-<span class="kw">kable</span>(collapse_rows_dt, <span class="st">&quot;latex&quot;</span>, <span class="dt">longtable =</span> <span class="ot">TRUE</span>,
-  <span class="dt">booktabs =</span> T, <span class="dt">align =</span> <span class="st">&quot;c&quot;</span>, <span class="dt">linesep =</span> <span class="st">&quot;&quot;</span>,
-  <span class="dt">caption =</span> <span class="st">&quot;第2种类型的统计表格样式&quot;</span>
-) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">kable_styling</span>(
-    <span class="dt">latex_options =</span> <span class="kw">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hold_position&quot;</span>, <span class="st">&quot;repeat_header&quot;</span>),
-    <span class="dt">full_width =</span> F, <span class="dt">position =</span> <span class="st">&quot;center&quot;</span>
-  ) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">column_spec</span>(<span class="dv">1</span>, <span class="dt">bold =</span> T) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,
-    <span class="dt">latex_hline =</span> <span class="st">&quot;custom&quot;</span>, <span class="dt">custom_latex_hline =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,
-    <span class="dt">row_group_label_position =</span> <span class="st">&quot;stack&quot;</span>,
-    <span class="dt">row_group_label_fonts =</span> row_group_label_fonts
-  )</code></pre>
-<p>To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <a href="https://yihui.name/tinytex/" class="uri">https://yihui.name/tinytex/</a>.</p>
 <p>对某些数据用不同颜色高亮
 Selecting and colouring single table cells with <strong>kableExtra</strong> in R markdown <code>cell_spec</code> <a href="https://stackoverflow.com/questions/50118394" class="uri">https://stackoverflow.com/questions/50118394</a></p>
-<p>软件信息</p>
+<div id="section-1.1" class="section level2">
+<h2><span class="header-section-number">1.1</span> 软件信息</h2>
 <pre class="sourceCode r"><code class="sourceCode r">xfun<span class="op">::</span><span class="kw">session_info</span>(<span class="dt">packages =</span> <span class="kw">c</span>(<span class="st">&quot;rmarkdown&quot;</span>,<span class="st">&quot;bookdown&quot;</span>,<span class="st">&quot;kableExtra&quot;</span>),
                    <span class="dt">dependencies =</span> <span class="ot">FALSE</span>)</code></pre>
 <pre><code>## R version 3.5.0 (2017-01-27)
@@ -264,6 +1143,7 @@ Selecting and colouring single table cells with <strong>kableExtra</strong> in R
 ## Package version:
 ##   bookdown_0.7.18  kableExtra_0.9.0 rmarkdown_1.10</code></pre>
 
+</div>
 </div>
             </section>
 
