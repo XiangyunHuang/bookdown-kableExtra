@@ -47,19 +47,6 @@ kable(db2,
     general = "* 星号表示的内容很长很长很长很长很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长"
   )
 ```
-
-- `striped` 默认使用浅灰色，`stripe_color` 可以用来指定颜色 `stripe_color="white"`，它只在 LaTeX 下工作，HTML 下更改颜色需要设置 CSS，可以不使用 `striped` 改变默认的白底设置  
-
-- `threeparttable = TRUE` 处理超长的注解标记，
-
-- `add_header_above` 函数内的 `escape = F` 用来处理数学公式，
-
-- `longtable = T` 表格很长时需要分页，因此使用续表，
-
-- `hold_position` 使用了 `[!h]` 控制浮动
-
-- 对于数学符号前要四个反斜杠这一点，作者今后会改变，只需要两个反斜杠，与 HTML 格式表格保持一致 <https://github.com/haozhu233/kableExtra/issues/120> 
-
 ```{r,eval=knitr::is_html_output(),echo=knitr::is_html_output()}
 kable(db2,
   format = "html", booktabs = TRUE, escape = T, row.names = F,
@@ -79,13 +66,17 @@ kable(db2,
   )
 ```
 
-
-To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <https://yihui.name/tinytex/>.
+- `striped` 默认使用浅灰色，`stripe_color` 可以用来指定颜色 `stripe_color="white"`，它只在 LaTeX 下工作，HTML 下更改颜色需要设置 CSS，可以不使用 `striped` 改变默认的白底设置  
+- `threeparttable = TRUE` 处理超长的注解标记，
+- `add_header_above` 函数内的 `escape = F` 用来处理数学公式，
+- `longtable = T` 表格很长时需要分页，因此使用续表，
+- `hold_position` 使用了 `[!h]` 控制浮动
+- 对于数学符号前要四个反斜杠这一点，作者今后会改变，只需要两个反斜杠，与 HTML 格式表格保持一致 <https://github.com/haozhu233/kableExtra/issues/120> 
 
 对某些数据用不同颜色高亮
 Selecting and colouring single table cells with **kableExtra** in R markdown `cell_spec` <https://stackoverflow.com/questions/50118394>
 
-软件信息
+## 软件信息
 
 ```{r}
 xfun::session_info(packages = c("rmarkdown","bookdown","kableExtra"),
