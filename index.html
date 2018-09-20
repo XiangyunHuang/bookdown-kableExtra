@@ -25,7 +25,7 @@
 <meta name="author" content="Yihui Xie">
 
 
-<meta name="date" content="2018-09-02">
+<meta name="date" content="2018-09-20">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -157,10 +157,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">A Minimal Book Example</h1>
 <p class="author"><em>Yihui Xie</em></p>
-<p class="date"><em>2018-09-02</em></p>
+<p class="date"><em>2018-09-20</em></p>
 </div>
 <div id="section-1" class="section level1">
 <h1><span class="header-section-number">Chapter 1</span> 表格</h1>
+<table style="width:86%;">
+<caption>没有编号的可以跨行的表格.</caption>
+<colgroup>
+<col width="16%" />
+<col width="11%" />
+<col width="22%" />
+<col width="36%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="center">First</td>
+<td align="left">row</td>
+<td align="right">12.0</td>
+<td align="left">Example of a row that
+spans multiple lines.</td>
+</tr>
+<tr class="even">
+<td align="center">Second</td>
+<td align="left">row</td>
+<td align="right">5.0</td>
+<td align="left">Here’s another one. Note
+the blank line between
+rows.</td>
+</tr>
+</tbody>
+</table>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;dplyr&#39;</code></pre>
@@ -1141,7 +1167,7 @@ Selecting and colouring single table cells with <strong>kableExtra</strong> in R
 ##   LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 ## 
 ## Package version:
-##   bookdown_0.7.18  kableExtra_0.9.0 rmarkdown_1.10</code></pre>
+##   bookdown_0.7.19  kableExtra_0.9.0 rmarkdown_1.10</code></pre>
 
 </div>
 </div>

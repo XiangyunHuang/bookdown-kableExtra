@@ -129,7 +129,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-09-02}
+    \date{2018-09-20}
 
 \usepackage[UTF8, heading]{ctex}
 
@@ -155,6 +155,31 @@
 \tableofcontents
 }
 \chapter{表格}
+
+\begin{longtable}[]{@{}clrl@{}}
+\caption{没有编号的可以跨行的表格.}\tabularnewline
+\toprule
+\endhead
+\begin{minipage}[t]{0.15\columnwidth}\centering
+First\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright
+row\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedleft
+12.0\strut
+\end{minipage} & \begin{minipage}[t]{0.32\columnwidth}\raggedright
+Example of a row that spans multiple lines.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.15\columnwidth}\centering
+Second\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright
+row\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedleft
+5.0\strut
+\end{minipage} & \begin{minipage}[t]{0.32\columnwidth}\raggedright
+Here's another one. Note the blank line between rows.\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -315,7 +340,7 @@ Volvo 142E & 21.4 & 4 & 121.0 & 109 & 4.11 & 2.780 & 18.60\\*
 ##   LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 ## 
 ## Package version:
-##   bookdown_0.7.18  kableExtra_0.9.0 rmarkdown_1.10
+##   bookdown_0.7.19  kableExtra_0.9.0 rmarkdown_1.10
 \end{verbatim}
 
 \bibliography{book.bib,packages.bib}
