@@ -25,8 +25,8 @@
 \usepackage{hyperref}
 \PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
 \hypersetup{unicode=true,
-            pdftitle={A Minimal Book Example},
-            pdfauthor={Yihui Xie},
+            pdftitle={kableExtra 在 bookdown 项目中的使用},
+            pdfauthor={黄湘云},
             colorlinks=true,
             linkcolor=Maroon,
             citecolor=Blue,
@@ -121,15 +121,15 @@
 
 \setlength{\droptitle}{-2em}
 
-  \title{A Minimal Book Example}
+  \title{kableExtra 在 bookdown 项目中的使用}
     \pretitle{\vspace{\droptitle}\centering\huge}
   \posttitle{\par}
-    \author{Yihui Xie}
+    \author{黄湘云}
     \preauthor{\centering\large\emph}
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-09-20}
+    \date{2019-02-22}
 
 \usepackage[UTF8, heading]{ctex}
 
@@ -154,32 +154,10 @@
 \setcounter{tocdepth}{1}
 \tableofcontents
 }
-\chapter{表格}
+\hypertarget{table}{%
+\chapter{表格}\label{table}}
 
-\begin{longtable}[]{@{}clrl@{}}
-\caption{没有编号的可以跨行的表格.}\tabularnewline
-\toprule
-\endhead
-\begin{minipage}[t]{0.15\columnwidth}\centering
-First\strut
-\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright
-row\strut
-\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedleft
-12.0\strut
-\end{minipage} & \begin{minipage}[t]{0.32\columnwidth}\raggedright
-Example of a row that spans multiple lines.\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.15\columnwidth}\centering
-Second\strut
-\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright
-row\strut
-\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedleft
-5.0\strut
-\end{minipage} & \begin{minipage}[t]{0.32\columnwidth}\raggedright
-Here's another one. Note the blank line between rows.\strut
-\end{minipage}\tabularnewline
-\bottomrule
-\end{longtable}
+这是一个稍微复杂一点的经典表格样式，常出现在论文或期刊的数值模拟比较部分
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -205,7 +183,7 @@ Here's another one. Note the blank line between rows.\strut
 \NormalTok{    ), }\DataTypeTok{escape =}\NormalTok{ F) }\OperatorTok{%>%}
 \StringTok{    }\KeywordTok{footnote}\NormalTok{(}
       \DataTypeTok{general_title =} \StringTok{"注："}\NormalTok{, }\DataTypeTok{title_format =} \StringTok{"italic"}\NormalTok{, }\DataTypeTok{threeparttable =}\NormalTok{ T,}
-      \DataTypeTok{general =} \StringTok{"* 星号表示的内容很长"}
+      \DataTypeTok{general =} \StringTok{"* 星号表示的内容可以很长"}
 \NormalTok{    )}
 \NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
   \KeywordTok{kable}\NormalTok{(db2,}
@@ -231,13 +209,13 @@ Here's another one. Note the blank line between rows.\strut
 \begin{ThreePartTable}
 \begin{TableNotes}
 \item \textit{注：} 
-\item * 星号表示的内容很长
+\item * 星号表示的内容可以很长
 \end{TableNotes}
-\begin{longtable}[t]{lrrrrrrr}
-\caption{\label{tab:kable}第1种类型的统计表格样式}\\
+\begin{longtable}{lrrrrrrr}
+\caption{\label{tab:kableExtra-in-bookdown}第1种类型的统计表格样式}\\
 \toprule
 \multicolumn{1}{c}{ } & \multicolumn{2}{c}{$\sigma^2$} & \multicolumn{2}{c}{$\phi$} & \multicolumn{2}{c}{$\tau^2$} & \multicolumn{1}{c}{$r=\delta/\phi$} \\
-\cmidrule(l{2pt}r{2pt}){2-3} \cmidrule(l{2pt}r{2pt}){4-5} \cmidrule(l{2pt}r{2pt}){6-7} \cmidrule(l{2pt}r{2pt}){8-8}
+\cmidrule(l{3pt}r{3pt}){2-3} \cmidrule(l{3pt}r{3pt}){4-5} \cmidrule(l{3pt}r{3pt}){6-7} \cmidrule(l{3pt}r{3pt}){8-8}
 Methods & Bias & RMSE & Bias & RMSE & Bias & RMSE & \\
 \midrule
 \endfirsthead
@@ -294,28 +272,51 @@ Volvo 142E & 21.4 & 4 & 121.0 & 109 & 4.11 & 2.780 & 18.60\\*
 \begin{itemize}
 \tightlist
 \item
-  \texttt{striped} 默认使用浅灰色，\texttt{stripe\_color}
-  可以用来指定颜色 \texttt{stripe\_color="white"}，它只在 LaTeX
-  下工作，HTML 下更改颜色需要设置 CSS，可以不使用 \texttt{striped}
-  改变默认的白底设置\\
+  \texttt{striped} 默认使用浅灰色，\texttt{stripe\_color} 可以用来指定颜色 \texttt{stripe\_color="white"}，它只在 LaTeX 下工作，HTML 下更改颜色需要设置 CSS，可以不使用 \texttt{striped} 改变默认的白底设置\\
 \item
   \texttt{threeparttable\ =\ TRUE} 处理超长的注解标记，
 \item
-  \texttt{add\_header\_above} 函数内的 \texttt{escape\ =\ F}
-  用来处理数学公式，
+  \texttt{add\_header\_above} 函数内的 \texttt{escape\ =\ F} 用来处理数学公式，
 \item
   \texttt{longtable\ =\ T} 表格很长时需要分页，因此使用续表，
 \item
   \texttt{hold\_position} 使用了 \texttt{{[}!h{]}} 控制浮动
 \item
-  对于数学符号前要四个反斜杠这一点，作者今后会改变，只需要两个反斜杠，与
-  HTML 格式表格保持一致
-  \url{https://github.com/haozhu233/kableExtra/issues/120}
+  对于数学符号前要四个反斜杠这一点，作者今后会改变，只需要两个反斜杠，与 HTML 格式表格保持一致 \url{https://github.com/haozhu233/kableExtra/issues/120}
+\item
+  对某些数据用不同颜色高亮
+  Selecting and colouring single table cells with \textbf{kableExtra} in R markdown \texttt{cell\_spec} \url{https://stackoverflow.com/questions/50118394}
 \end{itemize}
 
-对某些数据用不同颜色高亮 Selecting and colouring single table cells with
-\textbf{kableExtra} in R markdown \texttt{cell\_spec}
-\url{https://stackoverflow.com/questions/50118394}
+其实 Pandoc's Markdown 本身也支持不少表格样式\footnote{\url{http://pandoc.org/MANUAL.html\#tables}}，比如
+
+\begin{longtable}[]{@{}clrl@{}}
+\caption{没有编号的可以跨行的表格.}\tabularnewline
+\toprule
+\endhead
+\begin{minipage}[t]{0.15\columnwidth}\centering
+First\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright
+row\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedleft
+12.0\strut
+\end{minipage} & \begin{minipage}[t]{0.32\columnwidth}\raggedright
+Example of a row that
+spans multiple lines.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.15\columnwidth}\centering
+Second\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright
+row\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedleft
+5.0\strut
+\end{minipage} & \begin{minipage}[t]{0.32\columnwidth}\raggedright
+Here's another one. Note
+the blank line between
+rows.\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
 
 \section{软件信息}
 
@@ -327,7 +328,7 @@ Volvo 142E & 21.4 & 4 & 121.0 & 109 & 4.11 & 2.780 & 18.60\\*
 \end{Shaded}
 
 \begin{verbatim}
-## R version 3.5.0 (2017-01-27)
+## R version 3.5.2 (2017-01-27)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
 ## Running under: Ubuntu 14.04.5 LTS
 ## 
@@ -340,7 +341,9 @@ Volvo 142E & 21.4 & 4 & 121.0 & 109 & 4.11 & 2.780 & 18.60\\*
 ##   LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 ## 
 ## Package version:
-##   bookdown_0.7.19  kableExtra_0.9.0 rmarkdown_1.10
+##   bookdown_0.9     kableExtra_1.0.1 rmarkdown_1.11  
+## 
+## Pandoc version: 2.2.3.2
 \end{verbatim}
 
 \bibliography{book.bib,packages.bib}

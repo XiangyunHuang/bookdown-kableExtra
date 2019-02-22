@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>A Minimal Book Example</title>
+  <title>kableExtra 在 bookdown 项目中的使用</title>
   <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="A Minimal Book Example" />
+  <meta property="og:title" content="kableExtra 在 bookdown 项目中的使用" />
   <meta property="og:type" content="book" />
   
   
@@ -17,15 +17,15 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="A Minimal Book Example" />
+  <meta name="twitter:title" content="kableExtra 在 bookdown 项目中的使用" />
   
   <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   
 
-<meta name="author" content="Yihui Xie">
+<meta name="author" content="黄湘云">
 
 
-<meta name="date" content="2018-09-20">
+<meta name="date" content="2019-02-22">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -36,6 +36,7 @@
 <link rel="next" href="references.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -127,7 +128,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">A Minimal Book Example</a></li>
+<li><a href="./">kableExtra 在 bookdown 项目中的使用</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> 表格</a><ul>
@@ -146,7 +147,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Minimal Book Example</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">kableExtra 在 bookdown 项目中的使用</a>
           </h1>
         </div>
 
@@ -155,48 +156,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="header">
-<h1 class="title">A Minimal Book Example</h1>
-<p class="author"><em>Yihui Xie</em></p>
-<p class="date"><em>2018-09-20</em></p>
+<h1 class="title">kableExtra 在 bookdown 项目中的使用</h1>
+<p class="author"><em>黄湘云</em></p>
+<p class="date"><em>2019-02-22</em></p>
 </div>
-<div id="section-1" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> 表格</h1>
-<table style="width:86%;">
-<caption>没有编号的可以跨行的表格.</caption>
-<colgroup>
-<col width="16%" />
-<col width="11%" />
-<col width="22%" />
-<col width="36%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="center">First</td>
-<td align="left">row</td>
-<td align="right">12.0</td>
-<td align="left">Example of a row that
-spans multiple lines.</td>
-</tr>
-<tr class="even">
-<td align="center">Second</td>
-<td align="left">row</td>
-<td align="right">5.0</td>
-<td align="left">Here’s another one. Note
-the blank line between
-rows.</td>
-</tr>
-</tbody>
-</table>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;dplyr&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(kableExtra)
+<div id="table" class="section level1">
+<h1><span class="header-section-number">第 1 章</span> 表格</h1>
+<p>这是一个稍微复杂一点的经典表格样式，常出现在论文或期刊的数值模拟比较部分</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(kableExtra)
 db &lt;-<span class="st"> </span>mtcars[, <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>]
 db2 &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw">rownames</span>(db), db)
 <span class="kw">colnames</span>(db2) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Methods&quot;</span>, <span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;Bias&quot;</span>, <span class="st">&quot;RMSE&quot;</span>), <span class="dv">3</span>), <span class="st">&quot;&quot;</span>)
@@ -209,7 +177,7 @@ db2 &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw"
 <span class="st">    </span><span class="kw">kable_styling</span>(
       <span class="dt">latex_options =</span> <span class="kw">c</span>(<span class="st">&quot;hold_position&quot;</span>, <span class="st">&quot;repeat_header&quot;</span>),
       <span class="dt">full_width =</span> F, <span class="dt">position =</span> <span class="st">&quot;center&quot;</span>, <span class="dt">repeat_header_method =</span> <span class="st">&quot;replace&quot;</span>,
-      <span class="dt">repeat_header_text =</span> <span class="st">&quot;续表<a href="index.html#tab:kable">1.1</a>&quot;</span>
+      <span class="dt">repeat_header_text =</span> <span class="st">&quot;续表<a href="#tab:kable"><strong>??</strong></a>&quot;</span>
     ) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">add_header_above</span>(<span class="kw">c</span>(<span class="st">&quot; &quot;</span>,
       <span class="st">&quot;$</span><span class="ch">\\\\</span><span class="st">sigma^2$&quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;$</span><span class="ch">\\\\</span><span class="st">phi$&quot;</span> =<span class="st"> </span><span class="dv">2</span>,
@@ -217,7 +185,7 @@ db2 &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw"
     ), <span class="dt">escape =</span> F) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">footnote</span>(
       <span class="dt">general_title =</span> <span class="st">&quot;注：&quot;</span>, <span class="dt">title_format =</span> <span class="st">&quot;italic&quot;</span>, <span class="dt">threeparttable =</span> T,
-      <span class="dt">general =</span> <span class="st">&quot;* 星号表示的内容很长&quot;</span>
+      <span class="dt">general =</span> <span class="st">&quot;* 星号表示的内容可以很长&quot;</span>
     )
 } <span class="cf">else</span> {
   <span class="kw">kable</span>(db2,
@@ -239,29 +207,29 @@ db2 &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw"
 }</code></pre>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:kable">Table 1.1: </span>第1种类型的统计表格样式
+<span id="tab:kableExtra-in-bookdown">表 1.1: </span>第1种类型的统计表格样式
 </caption>
 <thead>
 <tr>
 <th style="border-bottom:hidden" colspan="1">
 </th>
 <th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
-<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
 <span class="math inline">\(\sigma^2\)</span>
 </div>
 </th>
 <th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
-<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
 <span class="math inline">\(\phi\)</span>
 </div>
 </th>
 <th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
-<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
 <span class="math inline">\(\tau^2\)</span>
 </div>
 </th>
 <th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
-<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
 <span class="math inline">\(r=\delta/\phi\)</span>
 </div>
 </th>
@@ -1147,14 +1115,41 @@ Volvo 142E
 <li><code>longtable = T</code> 表格很长时需要分页，因此使用续表，</li>
 <li><code>hold_position</code> 使用了 <code>[!h]</code> 控制浮动</li>
 <li>对于数学符号前要四个反斜杠这一点，作者今后会改变，只需要两个反斜杠，与 HTML 格式表格保持一致 <a href="https://github.com/haozhu233/kableExtra/issues/120" class="uri">https://github.com/haozhu233/kableExtra/issues/120</a></li>
+<li>对某些数据用不同颜色高亮
+Selecting and colouring single table cells with <strong>kableExtra</strong> in R markdown <code>cell_spec</code> <a href="https://stackoverflow.com/questions/50118394" class="uri">https://stackoverflow.com/questions/50118394</a></li>
 </ul>
-<p>对某些数据用不同颜色高亮
-Selecting and colouring single table cells with <strong>kableExtra</strong> in R markdown <code>cell_spec</code> <a href="https://stackoverflow.com/questions/50118394" class="uri">https://stackoverflow.com/questions/50118394</a></p>
+<p>其实 Pandoc’s Markdown 本身也支持不少表格样式<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>，比如</p>
+<table style="width:86%;">
+<caption>没有编号的可以跨行的表格.</caption>
+<colgroup>
+<col width="16%" />
+<col width="11%" />
+<col width="22%" />
+<col width="36%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="center">First</td>
+<td align="left">row</td>
+<td align="right">12.0</td>
+<td align="left">Example of a row that
+spans multiple lines.</td>
+</tr>
+<tr class="even">
+<td align="center">Second</td>
+<td align="left">row</td>
+<td align="right">5.0</td>
+<td align="left">Here’s another one. Note
+the blank line between
+rows.</td>
+</tr>
+</tbody>
+</table>
 <div id="section-1.1" class="section level2">
 <h2><span class="header-section-number">1.1</span> 软件信息</h2>
 <pre class="sourceCode r"><code class="sourceCode r">xfun<span class="op">::</span><span class="kw">session_info</span>(<span class="dt">packages =</span> <span class="kw">c</span>(<span class="st">&quot;rmarkdown&quot;</span>,<span class="st">&quot;bookdown&quot;</span>,<span class="st">&quot;kableExtra&quot;</span>),
                    <span class="dt">dependencies =</span> <span class="ot">FALSE</span>)</code></pre>
-<pre><code>## R version 3.5.0 (2017-01-27)
+<pre><code>## R version 3.5.2 (2017-01-27)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
 ## Running under: Ubuntu 14.04.5 LTS
 ## 
@@ -1167,9 +1162,17 @@ Selecting and colouring single table cells with <strong>kableExtra</strong> in R
 ##   LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 ## 
 ## Package version:
-##   bookdown_0.7.19  kableExtra_0.9.0 rmarkdown_1.10</code></pre>
+##   bookdown_0.9     kableExtra_1.0.1 rmarkdown_1.11  
+## 
+## Pandoc version: 2.2.3.2</code></pre>
 
 </div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p><a href="http://pandoc.org/MANUAL.html#tables" class="uri">http://pandoc.org/MANUAL.html#tables</a><a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
 </div>
             </section>
 
@@ -1197,7 +1200,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -1207,10 +1210,14 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": "https://github.com/XiangyunHuang/bookdown-kableExtra/edit/master/index.Rmd",
+"text": "Edit"
+},
+"history": {
 "link": null,
 "text": null
 },
-"download": ["bookdown-test.pdf", "bookdown-test.epub"],
+"download": ["bookdown-kableExtra.pdf"],
 "toc": {
 "collapse": "subsection"
 }
@@ -1224,7 +1231,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;
