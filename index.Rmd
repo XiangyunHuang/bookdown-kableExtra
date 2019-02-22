@@ -19,7 +19,7 @@ description: "This is a minimal example of using the bookdown package to write a
 
 这是一个稍微复杂一点的经典表格样式，常出现在论文或期刊的数值模拟比较部分^[<https://arxiv.org/abs/1711.00437>]
 
-```{r kableExtra-in-bookdown,message=FALSE}
+```{r kableExtra,message=FALSE}
 library(dplyr)
 library(kableExtra)
 db <- mtcars[, 1:7]
@@ -34,7 +34,7 @@ if (knitr::is_latex_output()) {
     kable_styling(
       latex_options = c("hold_position", "repeat_header"),
       full_width = F, position = "center", repeat_header_method = "replace",
-      repeat_header_text = "续表@ref(tab:kableExtra-in-bookdown)"
+      repeat_header_text = "续表@ref(tab:kableExtra)"
     ) %>%
     add_header_above(c(" ",
       "$\\\\sigma^2$" = 2, "$\\\\phi$" = 2,
@@ -59,7 +59,7 @@ if (knitr::is_latex_output()) {
     ), escape = F) %>%
     footnote(
       general_title = "注：", title_format = "italic", threeparttable = T,
-      general = "* 星号表示的内容很长"
+      general = "* 星号表示的内容可以很长"
     )
 }
 ```
@@ -91,7 +91,7 @@ Selecting and colouring single table cells with **kableExtra** in R markdown `ce
 
 ## 软件信息 {#session-info}
 
-```{r}
+```{r,eval=identical(Sys.getenv("TRAVIS"), "true")}
 devtools::session_info(.packages(T))
 ```
 

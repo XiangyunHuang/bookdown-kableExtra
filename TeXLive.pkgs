@@ -2,8 +2,11 @@ colortbl
 ctex
 environ
 fandol
+float
 jknapltx
+makecell
 ms
+multirow
 realscripts
 rsfs
 subfig
@@ -13,6 +16,8 @@ tocbibind
 trimspaces
 tabu
 ulem
+varwidth
+wrapfig
 xcolor
 xecjk
 xltxtra
