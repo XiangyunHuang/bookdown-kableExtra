@@ -69,7 +69,7 @@ if (knitr::is_latex_output()) {
 - `add_header_above` 函数内的 `escape = F` 用来处理数学公式，
 - `longtable = T` 表格很长时需要分页，因此使用续表，
 - `hold_position` 使用了 `[!h]` 控制浮动
-- 对于数学符号前要四个反斜杠这一点，作者今后会改变，只需要两个反斜杠，与 HTML 格式表格保持一致 <https://github.com/haozhu233/kableExtra/issues/120> 
+- 对于数学符号前要四个反斜杠这一点，作者今后可能会改变，只需要两个反斜杠，与 HTML 格式表格保持一致 <https://github.com/haozhu233/kableExtra/issues/120> 
 - 对某些数据用不同颜色高亮
 Selecting and colouring single table cells with **kableExtra** in R markdown `cell_spec` <https://stackoverflow.com/questions/50118394>
 
