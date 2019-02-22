@@ -1,5 +1,16 @@
-book_filename: "bookdown-test"
+book_filename: "bookdown-kableExtra"
 delete_merged_file: true
 language:
+  label:
+    fig: "图 "
+    tab: "表 "
+    thm: "定理 "
+    lem: "引理 "
+    cor: "推论 "
+    prp: "命题 "
+    def: "定义 "
+    exm: "例 "
+    exr: "练习 "
   ui:
-    chapter_name: "Chapter "
+    edit: "编辑"
+    chapter_name: ["第 ", " 章"]

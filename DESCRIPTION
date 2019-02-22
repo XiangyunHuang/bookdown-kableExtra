@@ -1,16 +1,8 @@
-Package: TB
+Package: placeholder
 Type: Book
-Title: Test Bookdown 
+Title: kableExtra in bookdown
 Version: 0.0.1
 Imports: 
   bookdown,
-  ggplot2,
-  gridExtra,
   kableExtra,
-  dplyr,
-  formatR
-Suggests: 
-  magick,
-  svglite
-Remotes: rstudio/rmarkdown,
-  rstudio/bookdown
+  dplyr

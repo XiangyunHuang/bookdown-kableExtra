@@ -1,6 +1,6 @@
 --- 
-title: "A Minimal Book Example"
-author: "Yihui Xie"
+title: "kableExtra 在 bookdown 项目中的使用"
+author: "黄湘云"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
@@ -15,24 +15,11 @@ description: "This is a minimal example of using the bookdown package to write a
 ---
 
 
-# 表格
+# 表格 {#table}
 
+这是一个稍微复杂一点的经典表格样式，常出现在论文或期刊的数值模拟比较部分
 
-
------------ ------- --------------- -------------------------
-   First    row                12.0 Example of a row that
-                                    spans multiple lines.
-
-  Second    row                 5.0 Here's another one. Note
-                                    the blank line between
-                                    rows.
------------ ------- --------------- -------------------------
-
-: 没有编号的可以跨行的表格.
-
-
-
-```{r kable}
+```{r kableExtra-in-bookdown,message=FALSE}
 library(dplyr)
 library(kableExtra)
 db <- mtcars[, 1:7]
@@ -55,7 +42,7 @@ if (knitr::is_latex_output()) {
     ), escape = F) %>%
     footnote(
       general_title = "注：", title_format = "italic", threeparttable = T,
-      general = "* 星号表示的内容很长"
+      general = "* 星号表示的内容可以很长"
     )
 } else {
   kable(db2,
@@ -83,9 +70,24 @@ if (knitr::is_latex_output()) {
 - `longtable = T` 表格很长时需要分页，因此使用续表，
 - `hold_position` 使用了 `[!h]` 控制浮动
 - 对于数学符号前要四个反斜杠这一点，作者今后会改变，只需要两个反斜杠，与 HTML 格式表格保持一致 <https://github.com/haozhu233/kableExtra/issues/120> 
-
-对某些数据用不同颜色高亮
+- 对某些数据用不同颜色高亮
 Selecting and colouring single table cells with **kableExtra** in R markdown `cell_spec` <https://stackoverflow.com/questions/50118394>
+
+
+其实 Pandoc's Markdown 本身也支持不少表格样式^[<http://pandoc.org/MANUAL.html#tables>]，比如
+
+----------- ------- --------------- -------------------------
+   First    row                12.0 Example of a row that
+                                    spans multiple lines.
+
+  Second    row                 5.0 Here's another one. Note
+                                    the blank line between
+                                    rows.
+----------- ------- --------------- -------------------------
+
+: 没有编号的可以跨行的表格.
+
+
 
 ## 软件信息
 
