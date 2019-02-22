@@ -74,7 +74,7 @@ if (knitr::is_latex_output()) {
 Selecting and colouring single table cells with **kableExtra** in R markdown `cell_spec` <https://stackoverflow.com/questions/50118394>
 
 
-其实 Pandoc's Markdown 本身也支持不少表格样式^[<http://pandoc.org/MANUAL.html#tables>]，比如
+其实 Pandoc's Markdown 本身也支持不少表格样式^[<https://pandoc.org/MANUAL.html#tables>]，少见的比如
 
 ----------- ------- --------------- -------------------------
    First    row                12.0 Example of a row that
@@ -89,11 +89,10 @@ Selecting and colouring single table cells with **kableExtra** in R markdown `ce
 
 
 
-## 软件信息
+## 软件信息 {#session-info}
 
 ```{r}
-xfun::session_info(packages = c("rmarkdown","bookdown","kableExtra"),
-                   dependencies = FALSE)
+devtools::session_info(.packages(T))
 ```
 
 
