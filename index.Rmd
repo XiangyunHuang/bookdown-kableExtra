@@ -17,7 +17,7 @@ description: "This is a minimal example of using the bookdown package to write a
 
 # 表格 {#table}
 
-这是一个稍微复杂一点的经典表格样式，常出现在论文或期刊的数值模拟比较部分
+这是一个稍微复杂一点的经典表格样式，常出现在论文或期刊的数值模拟比较部分^[<https://arxiv.org/abs/1711.00437>]
 
 ```{r kableExtra-in-bookdown,message=FALSE}
 library(dplyr)

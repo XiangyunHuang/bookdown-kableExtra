@@ -1,3 +1,3 @@
-[![Build Status](https://travis-ci.com/XiangyunHuang/bookdown-test.svg?branch=master)](https://travis-ci.com/XiangyunHuang/bookdown-test)
+[![Build Status](https://travis-ci.com/XiangyunHuang/bookdown-kableExtra.svg?branch=master)](https://travis-ci.com/XiangyunHuang/bookdown-kableExtra)
 
-This is a minimal example of a book based on R Markdown and **bookdown** (https://github.com/rstudio/bookdown). Please see the page "Get Started" at https://bookdown.org/ for how to compile this example.
+这是一个在 bookdown 项目里使用 [kableExtra](https://github.com/haozhu233/kableExtra) 创建复杂统计表格的例子，故事源起 COS 论坛的[一次讨论](https://d.cosx.org/d/420158-knitr-kable-kableextra)
