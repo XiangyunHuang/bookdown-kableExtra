@@ -177,7 +177,7 @@ db2 &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw"
 <span class="st">    </span><span class="kw">kable_styling</span>(
       <span class="dt">latex_options =</span> <span class="kw">c</span>(<span class="st">&quot;hold_position&quot;</span>, <span class="st">&quot;repeat_header&quot;</span>),
       <span class="dt">full_width =</span> F, <span class="dt">position =</span> <span class="st">&quot;center&quot;</span>, <span class="dt">repeat_header_method =</span> <span class="st">&quot;replace&quot;</span>,
-      <span class="dt">repeat_header_text =</span> <span class="st">&quot;续表<a href="index.html#tab:kableExtra-in-bookdown">1.1</a>&quot;</span>
+      <span class="dt">repeat_header_text =</span> <span class="st">&quot;续表<a href="index.html#tab:kableExtra">1.1</a>&quot;</span>
     ) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">add_header_above</span>(<span class="kw">c</span>(<span class="st">&quot; &quot;</span>,
       <span class="st">&quot;$</span><span class="ch">\\\\</span><span class="st">sigma^2$&quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;$</span><span class="ch">\\\\</span><span class="st">phi$&quot;</span> =<span class="st"> </span><span class="dv">2</span>,
@@ -202,12 +202,12 @@ db2 &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw"
     ), <span class="dt">escape =</span> F) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">footnote</span>(
       <span class="dt">general_title =</span> <span class="st">&quot;注：&quot;</span>, <span class="dt">title_format =</span> <span class="st">&quot;italic&quot;</span>, <span class="dt">threeparttable =</span> T,
-      <span class="dt">general =</span> <span class="st">&quot;* 星号表示的内容很长&quot;</span>
+      <span class="dt">general =</span> <span class="st">&quot;* 星号表示的内容可以很长&quot;</span>
     )
 }</code></pre>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:kableExtra-in-bookdown">表 1.1: </span>第1种类型的统计表格样式
+<span id="tab:kableExtra">表 1.1: </span>第1种类型的统计表格样式
 </caption>
 <thead>
 <tr>
@@ -1102,7 +1102,7 @@ Volvo 142E
 </tr>
 <tr>
 <td style="padding: 0; border: 0;" colspan="100%">
-<sup></sup> * 星号表示的内容很长
+<sup></sup> * 星号表示的内容可以很长
 </td>
 </tr>
 </tfoot>
@@ -1114,7 +1114,7 @@ Volvo 142E
 <li><code>add_header_above</code> 函数内的 <code>escape = F</code> 用来处理数学公式，</li>
 <li><code>longtable = T</code> 表格很长时需要分页，因此使用续表，</li>
 <li><code>hold_position</code> 使用了 <code>[!h]</code> 控制浮动</li>
-<li>对于数学符号前要四个反斜杠这一点，作者今后会改变，只需要两个反斜杠，与 HTML 格式表格保持一致 <a href="https://github.com/haozhu233/kableExtra/issues/120" class="uri">https://github.com/haozhu233/kableExtra/issues/120</a></li>
+<li>对于数学符号前要四个反斜杠这一点，作者今后可能会改变，只需要两个反斜杠，与 HTML 格式表格保持一致 <a href="https://github.com/haozhu233/kableExtra/issues/120" class="uri">https://github.com/haozhu233/kableExtra/issues/120</a></li>
 <li>对某些数据用不同颜色高亮
 Selecting and colouring single table cells with <strong>kableExtra</strong> in R markdown <code>cell_spec</code> <a href="https://stackoverflow.com/questions/50118394" class="uri">https://stackoverflow.com/questions/50118394</a></li>
 </ul>
