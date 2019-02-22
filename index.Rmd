@@ -34,7 +34,7 @@ if (knitr::is_latex_output()) {
     kable_styling(
       latex_options = c("hold_position", "repeat_header"),
       full_width = F, position = "center", repeat_header_method = "replace",
-      repeat_header_text = "续表@ref(tab:kable)"
+      repeat_header_text = "续表@ref(tab:kableExtra-in-bookdown)"
     ) %>%
     add_header_above(c(" ",
       "$\\\\sigma^2$" = 2, "$\\\\phi$" = 2,
