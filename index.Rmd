@@ -73,8 +73,11 @@ if (knitr::is_latex_output()) {
 - 对某些数据用不同颜色高亮
 Selecting and colouring single table cells with **kableExtra** in R markdown `cell_spec` <https://stackoverflow.com/questions/50118394>
 
+## Pandoc 支持的表格 {#pandoc-table}
 
-其实 Pandoc's Markdown 本身也支持不少表格样式^[<https://pandoc.org/MANUAL.html#tables>]，少见的比如
+::: sidebar
+其实 Pandoc's Markdown 本身也支持不少表格样式^[<https://pandoc.org/MANUAL.html#tables>]，比如
+:::
 
 ----------- ------- --------------- -------------------------
    First    row                12.0 Example of a row that
@@ -85,12 +88,50 @@ Selecting and colouring single table cells with **kableExtra** in R markdown `ce
                                     rows.
 ----------- ------- --------------- -------------------------
 
-: 没有编号的可以跨行的表格.
+: Here's a multiline table without headers. 没有表头的可以跨行的表格.
 
+
+-------------------------------------------------------------
+ Centered   Default           Right Left
+  Header    Aligned         Aligned Aligned
+----------- ------- --------------- -------------------------
+   First    row                12.0 Example of a row that
+                                    spans multiple lines.
+
+  Second    row                 5.0 Here's another one. Note
+                                    the blank line between
+                                    rows.
+-------------------------------------------------------------
+
+Table: 表格标题可以跨很多行，Here's the caption. It, too, may span
+multiple lines.
+
+
+: Sample grid table.
+
++---------------+---------------+--------------------+
+| Fruit         | Price         | Advantages         |
++===============+===============+====================+
+| Bananas       | $1.34         | - built-in wrapper |
+|               |               | - bright color     |
++---------------+---------------+--------------------+
+| Oranges       | $2.10         | - cures scurvy     |
+|               |               | - tasty            |
++---------------+---------------+--------------------+
+
+
+| Right | Left | Default | Center |
+|------:|:-----|---------|:------:|
+|   12  |  12  |    12   |    12  |
+|  123  |  123 |   123   |   123  |
+|    1  |    1 |     1   |     1  |
+
+  : 管道表格语法展示 Demonstration of pipe table syntax.
+  
 
 常见的简单表格样式，如表 \@ref(tab:simple-tab) 和表 \@ref(tab:another-tab)
 
-Table:  (\#tab:simple-tab) 简单表格语法展示
+Table:  (\#tab:simple-tab) 简单表格语法展示[^longnote]
 
   Right     Left     Center     Default
 -------     ------ ----------   -------
@@ -100,12 +141,28 @@ Table:  (\#tab:simple-tab) 简单表格语法展示
 
 再来一个表格
 
-Table: (\#tab:another-tab) 表格标题可以含有脚注^[附有脚注]
+Table: (\#tab:another-tab) 表格标题可以含有脚注^[附有一个简短的脚注]
 
 | First Header | Second Header |
 | :----------- | :------------ |
 | Content Cell | Content Cell  |
 | Content Cell | Content Cell  |
+
+
+
+[^longnote]: Here's one with multiple blocks.
+
+    Subsequent paragraphs are indented to show that they
+belong to the previous footnote.
+
+        { some.code }
+
+    The whole paragraph can be indented, or just the first
+    line.  In this way, multi-paragraph footnotes work like
+    multi-paragraph list items.
+
+This paragraph won't be part of the note, because it
+isn't indented. 这一段不会成为 note 的一部分，因为它没有缩进
 
 
 ## 软件信息 {#session-info}

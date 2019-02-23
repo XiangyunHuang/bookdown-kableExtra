@@ -1,4 +1,4 @@
-p.caption {
+.caption {
   color: #777;
   margin-top: 10px;
 }
@@ -11,4 +11,19 @@ pre {
 }
 pre code {
   white-space: inherit;
+}
+.sidebar {
+  border: 1px solid #ccc;
+  border-left-width: 5px;
+  border-radius: 5px;
+  padding: 1em;
+  margin: 1em 0;
+}
+
+.book .book-body .page-wrapper .page-inner section.normal div.sidebar > :first-child {
+  margin-top: 0;
+}
+
+.book .book-body .page-wrapper .page-inner section.normal div.sidebar > :last-child {
+  margin-bottom: 0;
 }
