@@ -88,6 +88,25 @@ Selecting and colouring single table cells with **kableExtra** in R markdown `ce
 : 没有编号的可以跨行的表格.
 
 
+常见的简单表格样式，如表 \@ref(tab:simple-tab) 和表 \@ref(tab:another-tab)
+
+Table:  (\#tab:simple-tab) 简单表格语法展示
+
+  Right     Left     Center     Default
+-------     ------ ----------   -------
+     12     12        12            12
+    123     123       123          123
+      1     1          1             1
+
+再来一个表格
+
+Table: (\#tab:another-tab) 表格标题可以含有脚注^[附有脚注]
+
+| First Header | Second Header |
+| :----------- | :------------ |
+| Content Cell | Content Cell  |
+| Content Cell | Content Cell  |
+
 
 ## 软件信息 {#session-info}
 
