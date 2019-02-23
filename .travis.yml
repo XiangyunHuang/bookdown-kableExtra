@@ -1,4 +1,8 @@
 language: r
+dist: 
+ - trusty
+ - xenial
+
 sudo: false
 cache:
   packages: true
