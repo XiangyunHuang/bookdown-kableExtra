@@ -4,5 +4,4 @@ Title: kableExtra in bookdown
 Version: 0.0.1
 Imports: 
   bookdown,
-  kableExtra,
-  dplyr
+  kableExtra
