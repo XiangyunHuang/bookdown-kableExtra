@@ -76,12 +76,7 @@ Selecting and colouring single table cells with **kableExtra** in R markdown `ce
 
 ## Pandoc 支持的表格 {#pandoc-table}
 
-::: sidebar
-其实 Pandoc's Markdown 本身也支持不少表格样式^[<https://pandoc.org/MANUAL.html#tables>]，比如
-:::
-
-
-常见的简单表格样式，如表 \@ref(tab:simple-tab) 和表 \@ref(tab:another-tab)
+其实 Pandoc's Markdown 本身也支持不少表格样式^[<https://pandoc.org/MANUAL.html#tables>]，比如常见的简单表格样式，如表 \@ref(tab:simple-tab) 和表 \@ref(tab:another-tab)
 
 Table:  (\#tab:simple-tab) 简单表格语法展示
 
