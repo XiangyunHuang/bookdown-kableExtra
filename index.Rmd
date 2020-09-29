@@ -3,12 +3,11 @@ title: "kableExtra 在 bookdown 项目中的使用"
 author: "黄湘云"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
-documentclass: book
+documentclass: ctexbook
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 colorlinks: yes
-mathspec: yes
 description: "This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook."
 ---
 
@@ -17,48 +16,53 @@ description: "This is a minimal example of using the bookdown package to write a
 
 这是一个稍微复杂一点的经典表格样式，常出现在论文或期刊的数值模拟比较部分^[<https://arxiv.org/abs/1711.00437>]
 
-```{r kableExtra,message=FALSE}
+```{r kableExtra}
 library(kableExtra)
-db <- mtcars[, 1:7]
-db2 <- cbind(rownames(db), db)
-colnames(db2) <- c("Methods", rep(c("Bias", "RMSE"), 3), "")
-if (knitr::is_latex_output()) {
-  kable(db2,
-    format = "latex", booktabs = TRUE, escape = T, row.names = F,
-    longtable = T, caption = "第1种类型的统计表格样式",
-    linesep = c("", "", "", "", "", "\\midrule")
+db <- mtcars[, 1:7] %>% 
+  transform(Methods = rownames(.)) %>% 
+  `colnames<-`(., value = c(rep(c("Bias", "RMSE"), 3), "", "Methods"))
+```
+
+
+```{r kableExtra-latex,echo=knitr::is_latex_output(),eval=knitr::is_latex_output()}
+kable(db,
+  format = "latex", booktabs = TRUE, escape = T, row.names = F,
+  longtable = T, caption = "第1种类型的统计表格样式",
+  linesep = c("", "", "", "", "", "\\midrule")
+) %>%
+  kable_styling(
+    latex_options = c("hold_position", "repeat_header"),
+    full_width = F, position = "center", repeat_header_method = "replace",
+    repeat_header_text = "续表@ref(tab:kableExtra-latex)"
   ) %>%
-    kable_styling(
-      latex_options = c("hold_position", "repeat_header"),
-      full_width = F, position = "center", repeat_header_method = "replace",
-      repeat_header_text = "续表@ref(tab:kableExtra)"
-    ) %>%
-    add_header_above(c(" ",
-      "$\\\\sigma^2$" = 2, "$\\\\phi$" = 2,
-      "$\\\\tau^2$" = 2, "$r=\\\\delta/\\\\phi$" = 1
-    ), escape = F) %>%
-    footnote(
-      general_title = "注：", title_format = "italic", threeparttable = T,
-      general = "* 星号表示的内容可以很长"
-    )
-} else {
-  kable(db2,
-    format = "html", booktabs = TRUE, escape = T, row.names = F,
-    caption = "第1种类型的统计表格样式"
+  add_header_above(c(
+    "$\\\\sigma^2$" = 2, "$\\\\phi$" = 2,
+    "$\\\\tau^2$" = 2, "$r=\\\\delta/\\\\phi$" = 1, " "
+  ), escape = F) %>%
+  footnote(
+    general_title = "注：", title_format = "italic", threeparttable = T,
+    general = "* 星号表示的内容可以很长"
+  )
+```
+
+
+```{r kableExtra-html,echo=knitr::is_html_output(),eval=knitr::is_html_output()}
+kable(db,
+  format = "html", booktabs = TRUE, escape = T, row.names = F,
+  caption = "第1种类型的统计表格样式"
+) %>%
+  kable_styling(
+    bootstrap_options = c("basic"),
+    full_width = F, position = "center"
   ) %>%
-    kable_styling(
-      bootstrap_options = c("basic"),
-      full_width = F, position = "center"
-    ) %>%
-    add_header_above(c("",
-      "$\\sigma^2$" = 2, "$\\phi$" = 2,
-      "$\\tau^2$" = 2, "$r=\\delta/\\phi$" = 1
-    ), escape = F) %>%
-    footnote(
-      general_title = "注：", title_format = "italic", threeparttable = T,
-      general = "* 星号表示的内容可以很长"
-    )
-}
+  add_header_above(c(
+    "$\\sigma^2$" = 2, "$\\phi$" = 2,
+    "$\\tau^2$" = 2, "$r=\\delta/\\phi$" = 1, ""
+  ), escape = F) %>%
+  footnote(
+    general_title = "注：", title_format = "italic", threeparttable = T,
+    general = "* 星号表示的内容可以很长"
+  )
 ```
 
 - `striped` 默认使用浅灰色，`stripe_color` 可以用来指定颜色 `stripe_color="white"`，它只在 LaTeX 下工作，HTML 下更改颜色需要设置 CSS，可以不使用 `striped` 改变默认的白底设置  
