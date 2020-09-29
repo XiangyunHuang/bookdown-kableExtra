@@ -1,6 +1,6 @@
 language: r
 r:
-  - 3.6.1
+  - 4.0.2
 dist: 
   - xenial
 
@@ -12,7 +12,7 @@ branches:
   only:
     - master
 
-pandoc_version: 2.3.1
+pandoc_version: 2.10.1
 
 repos:
   CRAN: https://cloud.r-project.org
@@ -21,15 +21,11 @@ addons:
   apt:
     packages:
       - ghostscript
-      - imagemagick
-      - optipng
-      - libmagick++-dev
 
 before_install:
-  - curl -fLo /tmp/tinytex.tar.gz https://travis-bin.yihui.name/tinytex.tar.gz
-  - tar xzf /tmp/tinytex.tar.gz -C $HOME
-  - export PATH=$HOME/.TinyTeX/bin/x86_64-linux:$PATH
-  - tlmgr install $(cat TeXLive.pkgs | tr '\n' ' ') || true
+  - Rscript -e 'install.packages("tinytex"); tinytex:::install_prebuilt(); tinytex::tinytex_root()'
+  - export PATH=$HOME/bin:$PATH
+  - Rscript -e 'tinytex::tlmgr_install(readLines("texlive.pkgs"))'
 
 before_script:
   - Rscript -e 'update.packages(lib.loc = .libPaths()[1], ask = FALSE)'
@@ -40,4 +36,3 @@ script:
 
 after_success:
   - ./_deploy.sh
-
